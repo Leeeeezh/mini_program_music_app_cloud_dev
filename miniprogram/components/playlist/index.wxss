@@ -1,0 +1,51 @@
+/* components/playlist/index.wxss */
+
+.container {
+  width: 300rpx;
+  position: relative;
+  margin-bottom: 60rpx;
+  background-color: #fff;
+  box-shadow: 0 0 14rpx #ccc;
+  border-radius: 14rpx;
+  overflow: hidden;
+}
+
+.img {
+  width: 300rpx;
+  height: 300rpx;
+  filter: brightness(.9);
+  /* border-radius: 6rpx; */
+}
+
+.playCount {
+  padding:10rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(255, 255, 255, 1);
+}
+
+.icon {
+  width: 26rpx;
+  height: 26rpx;
+  opacity: .8;
+}
+
+.name {
+  padding: 0 10rpx;
+  color: #555;
+  height:100rpx;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.name text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

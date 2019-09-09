@@ -1,0 +1,19 @@
+<!--pages/playlist/playlist.wxml-->
+<view class="container">
+  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="2000" circular="{{true}}" class="swiper">
+    <block wx:for="{{swiperImgUrls}}" wx:key="">
+      <swiper-item>
+        <image src="{{item.url}}" mode="widthFix"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <comp-title text="推荐" />
+  <view class="playlists">
+    <block wx:for="{{playlists}}" wx:key="">
+      <comp-playlist playlist="{{item}}" />
+    </block>
+  </view>
+
+
+</view>

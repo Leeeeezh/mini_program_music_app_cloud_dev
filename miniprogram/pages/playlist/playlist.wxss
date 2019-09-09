@@ -1,0 +1,21 @@
+/* pages/playlist/playlist.wxss */
+.container {
+  background-color: #f0f0f0;
+}
+
+.swiper {
+  box-shadow: 0 0 20rpx #aaa;
+}
+
+image {
+  width: 100%;
+}
+
+.playlists {
+  padding: 20rpx 20rpx 10rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}

@@ -1,10 +1,10 @@
 /* pages/playlist/playlist.wxss */
 .container {
-  background-color: #f0f0f0;
+  background-color: #fff;
 }
 
 .swiper {
-  box-shadow: 0 0 20rpx #aaa;
+  /* box-shadow: 0 0 20rpx #aaa; */
 }
 
 image {

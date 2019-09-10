@@ -3,18 +3,19 @@
 .container {
   width: 300rpx;
   position: relative;
-  margin-bottom: 60rpx;
+  margin-bottom: 30rpx;
   background-color: #fff;
-  box-shadow: 0 0 14rpx #ccc;
-  border-radius: 14rpx;
+  /* box-shadow: 0 0 14rpx #99a7a0; */
+  /* border-radius: 14rpx 0; */
   overflow: hidden;
+
 }
 
 .img {
   width: 300rpx;
   height: 300rpx;
   filter: brightness(.9);
-  /* border-radius: 6rpx; */
+  border-radius: 14rpx;
 }
 
 .playCount {
@@ -32,14 +33,18 @@
 }
 
 .name {
-  padding: 0 10rpx;
+  /* border-top: 6rpx solid #64edac; */
+  /* padding: 0 10rpx; */
   color: #555;
   height:100rpx;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+
+  font-size: 26rpx;
+  text-align: center;
 }
 
 .name text {

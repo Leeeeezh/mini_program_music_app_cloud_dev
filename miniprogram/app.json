@@ -5,20 +5,20 @@
     "pages/profile/profile"
   ],
   "tabBar": {
-    "color":"#666",
-    "selectedColor":"#d81e06",
+    "color":"#95b7c9",
+    "selectedColor":"#64edac",
     "list": [
       {
         "pagePath": "pages/playlist/playlist",
-        "text": "音乐",
-        "iconPath": "icons/music.png",
-        "selectedIconPath": "icons/music-fill.png"
+        "text": "首页",
+        "iconPath": "icons/home.png",
+        "selectedIconPath": "icons/home-fill.png"
       },
       {
         "pagePath": "pages/blog/blog",
         "text": "发现",
-        "iconPath": "/icons/eye.png",
-        "selectedIconPath": "icons/eye-fill.png"
+        "iconPath": "/icons/blog.png",
+        "selectedIconPath": "icons/blog-fill.png"
       },
       {
         "pagePath": "pages/profile/profile",
@@ -31,9 +31,9 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#d81e06",
+    "navigationBarBackgroundColor": "#64edac",
     "navigationBarTitleText": "轻听Music",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"
 }

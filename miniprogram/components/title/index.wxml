@@ -1,4 +1,6 @@
 <!--components/title/index.wxml-->
 <view class="container">
+  <view class="line"></view>
   <text class="title">{{text}}</text>
+  <view class="line"></view>
 </view>

@@ -1,6 +1,6 @@
 <!--pages/playlist/playlist.wxml-->
 <view class="container">
-  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="2000" circular="{{true}}" class="swiper">
+  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="2000" circular="{{true}}" class="swiper" indicator-color="rgba(0, 0, 0 ,.2)" indicator-active-color="#64edac">
     <block wx:for="{{swiperImgUrls}}" wx:key="">
       <swiper-item>
         <image src="{{item.url}}" mode="widthFix"></image>

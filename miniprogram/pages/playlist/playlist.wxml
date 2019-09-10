@@ -8,12 +8,13 @@
     </block>
   </swiper>
 
-  <comp-title text="推荐" />
+  <comp-title text="今日推荐" />
   <view class="playlists">
     <block wx:for="{{playlists}}" wx:key="">
       <comp-playlist playlist="{{item}}" />
     </block>
   </view>
+  <comp-title text="做人要有底线" wx:if="{{loadMoreLock}}" />
 
 
 </view>

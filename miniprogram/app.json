@@ -2,11 +2,12 @@
   "pages": [
     "pages/playlist/playlist",
     "pages/blog/blog",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/musiclist/musiclist"
   ],
   "tabBar": {
-    "color":"#95b7c9",
-    "selectedColor":"#64edac",
+    "color": "#95b7c9",
+    "selectedColor": "#64edac",
     "list": [
       {
         "pagePath": "pages/playlist/playlist",

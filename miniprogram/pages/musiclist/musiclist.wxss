@@ -1,0 +1,105 @@
+/* pages/musiclist/musiclist.wxss */
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.headBg {
+  width: 800rpx;
+  height: 800rpx;
+  position: absolute;
+  top: -25rpx;
+  left: -25rpx;
+  background-size: 100%;
+  background-position: 0 0;
+  filter: blur(2px) brightness(0.5);
+}
+
+.headContent {
+  width: 100%;
+  padding: 30rpx 20rpx 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.cover {
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 10rpx;
+}
+
+.name {
+  padding: 20rpx;
+  /* font-weight: bold; */
+}
+
+.tags .value {
+  margin: 10rpx;
+  padding: 6rpx 14rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+
+.description {
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-top: 20rpx;
+}
+
+.jumbo {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 750rpx;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  background-position: 50% 50%;
+  background-size: 170%;
+  background-repeat: no-repeat;
+}
+
+.jumbo .text .name {
+  /* box-sizing: border-box; */
+  font-size: 50rpx;
+  font-weight: bold;
+  padding: 0 20rpx 40rpx;
+}
+
+.jumbo .text .content {
+  font-size: 28rpx;
+}
+
+.jumbo .text {
+  box-sizing: border-box;
+  padding: 50rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 750rpx;
+  height: 100vh;
+  backdrop-filter: blur(4px) brightness(.6);
+}
+
+.close {
+  /* position: absolute; */
+  /* padding: 30rpx; */
+  width: 70rpx;
+  height: 70rpx;
+  opacity: .5;
+}

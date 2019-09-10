@@ -2,5 +2,6 @@
   "usingComponents": {
     "comp-playlist": "../../components/playlist/index",
     "comp-title": "../../components/title/index"
-  }
+  },
+  "enablePullDownRefresh": true
 }

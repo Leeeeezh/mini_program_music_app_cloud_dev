@@ -1,6 +1,6 @@
 <!--components/playlist/index.wxml-->
 <wxs src="../../scripts/utils.wxs" module="utils" />
-<view class="container">
+<view class="container" bind:tap="navToMusicList">
   <image class="img" src="{{playlist.picUrl}}"></image>
   <view class="playCount">
     <image class="icon" src="../../icons/music-white.png"></image>

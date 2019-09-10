@@ -1,0 +1,28 @@
+<!--pages/musiclist/musiclist.wxml-->
+<view class="container">
+  <view class="head" bind:tap="toggleJumbo">
+    <view class="headBg" style="background-image:url({{listInfo.coverImgUrl}})"></view>
+    <view class="headContent">
+      <image class="cover" src="{{listInfo.coverImgUrl}}"></image>
+      <text class="name">{{listInfo.name}}</text>
+
+      <view class="tags">
+        <text class="text">标签:</text>
+
+        <block wx:for="{{listInfo.tags}}" wx:key="">
+          <text class="value">{{item}}</text>
+        </block>
+      </view>
+
+      <text class="description">{{listInfo.description}}</text>
+    </view>
+  </view>
+
+  <view class="jumbo" style="background-image:url({{listInfo.coverImgUrl}})" wx:if="{{isJumboShow}}" bind:tap="toggleJumbo">
+    <view class="text">
+      <text class="name">{{listInfo.name}}</text>
+      <text class="content">{{listInfo.description}}</text>
+      <image class="close" src="../../icons/close.png"></image>
+    </view>
+  </view>
+</view>

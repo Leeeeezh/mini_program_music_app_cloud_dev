@@ -1,0 +1,17 @@
+<!--pages/player/player.wxml-->
+<view class="container">
+  <view class="bg" style="background:url({{musicInfo.al.picUrl}}) center/cover no-repeat;"></view>
+
+  <view class="content">
+    <view class="disc {{isPlaying?'rotation':''}}">
+      <image class="cover" src="{{musicInfo.al.picUrl}}"></image>
+    </view>
+  </view>
+
+  <view class="controller">
+    <span class="iconfont icon-angle-left"></span>
+    <span class="iconfont {{isPlaying?'icon-pausecircle':'icon-playcircle'}}" bind:tap="togglePlay"></span>
+    <span class="iconfont icon-angle-right"></span>
+  </view>
+
+</view>

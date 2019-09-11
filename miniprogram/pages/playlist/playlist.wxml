@@ -8,7 +8,7 @@
     </block>
   </swiper>
 
-  <comp-title text="今日推荐" />
+  <comp-title text="每日推荐" />
   <view class="playlists">
     <block wx:for="{{playlists}}" wx:key="">
       <comp-playlist playlist="{{item}}" />

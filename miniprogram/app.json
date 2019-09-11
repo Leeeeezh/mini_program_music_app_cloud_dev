@@ -4,7 +4,8 @@
     "pages/blog/blog",
     "pages/profile/profile",
     "pages/musiclist/musiclist",
-    "pages/jumbo/jumbo"
+    "pages/jumbo/jumbo",
+    "pages/player/player"
   ],
   "tabBar": {
     "color": "#95b7c9",
@@ -37,5 +38,8 @@
     "navigationBarTitleText": "轻听Music",
     "navigationBarTextStyle": "black"
   },
+  "requiredBackgroundModes": [
+    "audio"
+  ],
   "sitemapLocation": "sitemap.json"
 }

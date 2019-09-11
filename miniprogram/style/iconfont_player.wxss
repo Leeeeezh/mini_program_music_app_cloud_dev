@@ -1,0 +1,45 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1568202213738'); /* IE9 */
+  src: url('iconfont.eot?t=1568202213738#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAARAAAsAAAAACbgAAAP0AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDXAqFaIR4ATYCJAMgCxIABCAFhG0HeRtrCBGVnFnIfhw4Z7dgpc7Vz8aHotqmINn34IGvM9//f5KdlXQrNFkXSrYwZ2ucoBtxo25BiamOcFCBzRTGE87hW/tZ6WgrT5gIU5S1Rx71p7fAk03pf44l37WeR367a5esXJfuDQc0oOgm2cRxKuLW7KJAu6vidj0EEEQaJYhujua+6GjwbgIQk8aPHY7esKJNEAS6wT5wrIbYgg1drpX3gc3Z34vPVAkdJDYF36jnGGMUnaxQa6oy/SaDlIm5PzdgnwQKKAE0EPMGvTNQRbYERVCY1nDA4mAdibTCrWirhzXV78d+RUB3V16RO4gw0Uaof3kShYYNOwEg7LA2BPpRjibg/skiFgRYYSxIsMJZUGBFs6CB1Z0FG1g9WLCDNdVKAFD6zhFAOHAVhJMwKZ0aCoVESDgkRNOUSH+ESkyw28uGe9/3931wet71c7/t7/M5vd7+bndfj2dIsAwaiNFNrShUhgynhg4ftnB9ug6mu92oMRe9og0fHLze075Xn0u+4L7rbhf07X/4btA6txvTUzh67BGfaPN6Z45xjh7Vf+zovmPG9ls43TxiV9J46E7wHt07Y7sNpLsu77f+XvHwHTG5dKLFv/SRlpGhPRJzRkasrEq9zpPq0ycF1UlLDKXhihxistm/VM0/m43vFucsWbL05dLnlC/vVD+vzrGgviZ/hHH6gtzHkT+stsExf35dXe3QfOP5c2N4fg2u7N9rFi6m/db8zq7oWV7WqyI7sdPaWfNItTYLZVeW9ey2MWLpwYODBvlZlCxhfu28VZevZN8ZN+thq2uWb9zdbEM4XbKbNKA2rA1aXdIIS5vunv+kF+XCu5xbZ38ZN92TFi6NVlc3sbZ4pghpwoA97n15QnUGv6nSlJm9RgACbt5suzY0vN03fa0B8Gjv/3ck3g5hek0H/iQ61pb9myybnaxzLRRs0xcMjsTrDG66EUKbymUZEgTJIvgnBaM836c+du00CHpDZoMUIBUUXQ5Cw5SATbAasNN1hCDF6nzBov+fffaBIisBQoQTIIW5BEqEBwgN8wxs4nwFu4gUBOnf6zmD5TVevTF6wUTDndxYstYOUXnjN8w59lxXZNR/cHMJOpRVtAtfyOB9HNAu5iiiSXNJ9Ek3Q4yFKhePUbZWpJ525WOGvmg7ljRTumLQEzAhI9yR8UZFppPlher8/jcwzqIeTwwbCv8D1ri1k0plKtZAfGnzWsOey0tmujCOZhEaGYMVCXGQG6JkCzJteCsPRmJr3Bbp6qRcTTdmXe32+Pr0Sq8CgvBP6B2drau7p7dP8N+fG0bHY4RqUmpJrLG/866iC1j32dRu2BkryhLpTbQ8NNszZjM=') format('woff2'),
+  url('iconfont.woff?t=1568202213738') format('woff'),
+  url('iconfont.ttf?t=1568202213738') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1568202213738#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pausecircle:before {
+  content: "\e80d";
+}
+
+.icon-stopcircle:before {
+  content: "\e80e";
+}
+
+.icon-playcircle:before {
+  content: "\e80f";
+}
+
+.icon-like:before {
+  content: "\e813";
+}
+
+.icon-angle-right:before {
+  content: "\e84e";
+}
+
+.icon-angle-left:before {
+  content: "\e84f";
+}
+
+.icon-share:before {
+  content: "\e86f";
+}
+

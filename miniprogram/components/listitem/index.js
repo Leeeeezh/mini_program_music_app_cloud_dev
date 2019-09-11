@@ -8,7 +8,8 @@ Component({
     name: String,
     author: Array,
     index: Number,
-    isPlaying: Boolean
+    isPlaying: Boolean,
+    alia: Array
   },
   // play(){
 

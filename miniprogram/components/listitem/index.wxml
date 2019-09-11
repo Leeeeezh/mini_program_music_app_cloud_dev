@@ -5,7 +5,8 @@
   </view>
   <view class="info">
     <view class="name">
-      <text>{{name}}</text>
+      <text class="mainName">{{name}}</text>
+      <text class="alia" wx:if="{{alia.length!=0}}">{{alia[0]}}</text>
     </view>
     <view class="author">
       <block wx:for="{{author}}" wx:key="">

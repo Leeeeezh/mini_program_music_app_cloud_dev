@@ -16,9 +16,14 @@ Page({
     playingId: -1
   },
   play(event){
-    // console.log(event.currentTarget.dataset.id)
+    const currentId = event.currentTarget.dataset.id 
+    const index = event.currentTarget.dataset.index
     this.setData({
-      playingId: event.currentTarget.dataset.id
+      playingId: currentId
+    })
+    getApp().globalData.playingId = currentId
+    wx.navigateTo({
+      url: `../../pages/player/player?index=${index}`,
     })
   },
   navToJumbo() {
@@ -40,8 +45,10 @@ Page({
     // })
   },
   onLoad: function(options) {
+    // console.log(getApp().globalData.playingId)
     this.setData({
-      playlistId: options.playlistId
+      playlistId: options.playlistId,
+      playingId: getApp().globalData.playingId
     })
     wx.showLoading({
       title: '加载中>_<',
@@ -64,56 +71,11 @@ Page({
         }
       })
       wx.hideLoading()
-      console.log(playlist.tracks)
+      this._setMusicList()
+      // console.log(playlist.tracks)
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+  _setMusicList(){
+    wx.setStorageSync('musiclist', this.data.musiclist)
   }
 })

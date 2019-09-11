@@ -94,7 +94,7 @@ Page({
       return
     }
     wx.showLoading({
-      title: '正在拼命加载>_<',
+      title: '加载中>_<',
     })
     wx.cloud.callFunction({
       name: 'music',

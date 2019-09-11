@@ -1,0 +1,64 @@
+/* pages/jumbo/jumbo.wxss */
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg {
+  /* position: absolute; */
+  /* z-index: 100; */
+  /* top: 0; */
+  /* left: 0; */
+  width: 100vw;
+  height: 100vh;
+  transform: scale(1.2);
+  transform-origin: 50% 50%;
+  background-size: 170%;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-color: black;
+  filter: blur(4px) brightness(0.4);
+}
+
+.content {
+  overflow: scroll;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(255, 255, 255, 0.6);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.name {
+  padding: 40rpx 20rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.desc {
+  font-size: 28rpx;
+  text-align: center;
+  padding: 0 20rpx 100rpx;
+  line-height: 60rpx;
+}
+
+.close {
+
+  position: fixed;
+  bottom: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height:60rpx;
+  opacity: .6;
+}

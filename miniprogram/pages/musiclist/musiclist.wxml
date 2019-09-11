@@ -1,6 +1,6 @@
 <!--pages/musiclist/musiclist.wxml-->
 <view class="container">
-  <view class="head" bind:tap="toggleJumbo">
+  <view class="head" bind:tap="navToJumbo">
     <view class="headBg" style="background-image:url({{listInfo.coverImgUrl}})"></view>
     <view class="headContent">
       <image class="cover" src="{{listInfo.coverImgUrl}}"></image>
@@ -17,12 +17,9 @@
       <text class="description">{{listInfo.description}}</text>
     </view>
   </view>
-
-  <view class="jumbo" style="background-image:url({{listInfo.coverImgUrl}})" wx:if="{{isJumboShow}}" bind:tap="toggleJumbo">
-    <view class="text">
-      <text class="name">{{listInfo.name}}</text>
-      <text class="content">{{listInfo.description}}</text>
-      <image class="close" src="../../icons/close.png"></image>
-    </view>
+  <view class="body">
+    <block wx:for="{{musiclist}}" wx:key="index">
+      <comp-listitem name="{{item.name}}" author="{{item.ar}}" id="{{item.id}}" index="{{index+1}}" class="listitem" isPlaying="{{item.id===playingId}}" data-id="{{item.id}}" bind:tap="play"/>
+    </block>
   </view>
 </view>

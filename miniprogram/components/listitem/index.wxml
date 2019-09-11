@@ -1,0 +1,16 @@
+<!--components/listitem/index.wxml-->
+<view class="container {{isPlaying?'active':''}}" >
+  <view class="index">
+    <text>{{index}}</text>
+  </view>
+  <view class="info">
+    <view class="name">
+      <text>{{name}}</text>
+    </view>
+    <view class="author">
+      <block wx:for="{{author}}" wx:key="">
+        <text>{{item.name}}</text>
+      </block>
+    </view>
+  </view>
+</view>

@@ -5,10 +5,17 @@
   position: relative;
 }
 
+.head {
+  width: 750rpx;
+  height: 750rpx;
+  overflow: hidden;
+}
+
 .headBg {
+  /* overflow: hidden; */
   width: 800rpx;
   height: 800rpx;
-  position: absolute;
+  position: relative;
   top: -25rpx;
   left: -25rpx;
   background-size: 100%;
@@ -17,8 +24,10 @@
 }
 
 .headContent {
-  width: 100%;
-  padding: 30rpx 20rpx 0;
+  box-sizing: border-box;
+  width: 750rpx;
+  height: 750rpx;
+  /* padding: 30rpx 20rpx 0; */
   position: absolute;
   top: 0;
   left: 0;
@@ -55,51 +64,16 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-top: 20rpx;
+  padding: 20rpx 20rpx 0;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.jumbo {
-  position: absolute;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 750rpx;
-  height: 100vh;
-  color: white;
-  text-align: center;
-  background-position: 50% 50%;
-  background-size: 170%;
-  background-repeat: no-repeat;
-}
-
-.jumbo .text .name {
-  /* box-sizing: border-box; */
-  font-size: 50rpx;
-  font-weight: bold;
-  padding: 0 20rpx 40rpx;
-}
-
-.jumbo .text .content {
-  font-size: 28rpx;
-}
-
-.jumbo .text {
-  box-sizing: border-box;
-  padding: 50rpx 30rpx;
+.body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  width: 750rpx;
-  height: 100vh;
-  backdrop-filter: blur(4px) brightness(.6);
 }
 
-.close {
-  /* position: absolute; */
-  /* padding: 30rpx; */
-  width: 70rpx;
-  height: 70rpx;
-  opacity: .5;
+.listitem {
+  /* margin: 20rpx 0; */
 }

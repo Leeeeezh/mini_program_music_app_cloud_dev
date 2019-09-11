@@ -1,0 +1,12 @@
+<!--pages/jumbo/jumbo.wxml-->
+<view class="container" bind:tap="navBack">
+  <view class="bg" style="background-image: url({{img}})">
+  </view>
+
+  <view class="content">
+    <text class="name">{{name}}</text>
+    <text class="desc">{{desc}}</text>
+  </view>
+
+  <image class="close" src="../../icons/close.png" ></image>
+</view>

@@ -12,5 +12,13 @@ App({
     }
 
     this.globalData = {}
+  },
+  globalData: {
+    jumboData: {
+      img: '',
+      name: '',
+      desc: ''
+    },
+    playingId: -1
   }
 })

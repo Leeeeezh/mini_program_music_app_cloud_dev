@@ -3,15 +3,15 @@
   <view class="bg" style="background:url({{musicInfo.al.picUrl}}) center/cover no-repeat;"></view>
 
   <view class="content">
-    <view class="disc {{isPlaying?'rotation':''}}">
+    <view class="disc rotation {{isPlaying?'':'rotationPaused'}}">
       <image class="cover" src="{{musicInfo.al.picUrl}}"></image>
     </view>
   </view>
 
   <view class="controller">
-    <span class="iconfont icon-angle-left"></span>
+    <span class="iconfont icon-angle-left" bind:tap="prevMusic"></span>
     <span class="iconfont {{isPlaying?'icon-pausecircle':'icon-playcircle'}}" bind:tap="togglePlay"></span>
-    <span class="iconfont icon-angle-right"></span>
+    <span class="iconfont icon-angle-right" bind:tap="nextMusic"></span>
   </view>
 
 </view>

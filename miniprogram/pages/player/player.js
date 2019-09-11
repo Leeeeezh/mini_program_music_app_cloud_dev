@@ -7,9 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    index: -1,
+    index: 0,
     musicInfo: {},
-    isPlaying: true
+    isPlaying: true,
+    listLength: 0
   },
 
   /**
@@ -17,21 +18,60 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      index: options.index
+      listLength: wx.getStorageSync('musiclist').length
     })
-    this._getMusicInfoFromCache()
+    this._init(options.index)
+  },
+
+  nextMusic() {
+    // console.log('next')
+    player.stop()
+    if (this.data.index === this.data.listLength - 1) {
+      // console.log('to end')
+      wx.showToast({
+        title: '回到第一首啦',
+        icon: 'none',
+        duration: 1500
+      })
+      this._init(0)
+    } else {
+      this._init(parseInt(this.data.index) + 1)
+    }
+  },
+  prevMusic() {
+    player.stop()
+    // console.log('prev')
+    if (this.data.index === 0) {
+      wx.showToast({
+        title: '跳到最后一首啦',
+        icon: 'none',
+        duration: 1500
+      })
+      console.log('to head')
+      this._init(this.data.listLength - 1)
+    } else {
+      this._init(parseInt(this.data.index) - 1)
+    }
+  },
+
+  _init(index) {
+    this.setData({
+      index: index
+    })
+    this._getMusicInfoFromCache(index)
+    // console.log(this.data)
     wx.setNavigationBarTitle({
       title: this.data.musicInfo.name,
     })
 
     wx.cloud.callFunction({
-      name:"music",
-      data:{
+      name: "music",
+      data: {
         musicId: this.data.musicInfo.id,
         $url: 'musicUrl'
       }
-    }).then(res=>{
-      console.log(res)
+    }).then(res => {
+      // console.log(res)
       let musicUrl = JSON.parse(res.result).data[0].url
       player.src = musicUrl
       player.title = this.data.musicInfo.name
@@ -41,18 +81,29 @@ Page({
     })
   },
 
-  _getMusicInfoFromCache() {
-    const musicInfo = wx.getStorageSync('musiclist')[this.data.index]
+  _getMusicInfoFromCache(index) {
+    const musicList = wx.getStorageSync('musiclist')
+    const musicInfo = musicList[index]
+    console.log('index===>', index)
     // console.log(musicInfo)
     this.setData({
-      musicInfo: musicInfo
+      musicInfo: musicInfo,
+      listLength: musicList.length
     })
+    console.log('===>', musicInfo)
   },
 
   togglePlay() {
     this.setData({
       isPlaying: !this.data.isPlaying
     })
+
+    const isPlaying = this.data.isPlaying
+    if (isPlaying) {
+      player.play()
+    } else {
+      player.pause()
+    }
   },
 
   /**

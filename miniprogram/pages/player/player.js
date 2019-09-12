@@ -2,20 +2,14 @@
 
 const player = wx.getBackgroundAudioManager()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     index: 0,
     musicInfo: {},
     isPlaying: true,
-    listLength: 0
+    listLength: 0,
+    prevFlag: false,
+    nextFlag: false
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     this.setData({
       listLength: wx.getStorageSync('musiclist').length
@@ -24,10 +18,10 @@ Page({
   },
 
   nextMusic() {
-    // console.log('next')
     player.stop()
+    this._initAnimation('next')
+
     if (this.data.index === this.data.listLength - 1) {
-      // console.log('to end')
       wx.showToast({
         title: '回到第一首啦',
         icon: 'none',
@@ -40,17 +34,32 @@ Page({
   },
   prevMusic() {
     player.stop()
-    // console.log('prev')
-    if (this.data.index === 0) {
+    this._initAnimation('prev')
+    if (parseInt(this.data.index) === 0) {
       wx.showToast({
         title: '跳到最后一首啦',
         icon: 'none',
         duration: 1500
       })
-      console.log('to head')
       this._init(this.data.listLength - 1)
     } else {
       this._init(parseInt(this.data.index) - 1)
+    }
+  },
+  _initAnimation(direction) {
+    //  触发歌曲切换动画
+    this.setData({
+      prevFlag: false,
+      nextFlag: false
+    })
+    if (direction === 'prev') {
+      this.setData({
+        prevFlag: true
+      })
+    } else {
+      this.setData({
+        nextFlag: true
+      })
     }
   },
 
@@ -59,11 +68,13 @@ Page({
       index: index
     })
     this._getMusicInfoFromCache(index)
-    // console.log(this.data)
+    console.log(this.data)
     wx.setNavigationBarTitle({
       title: this.data.musicInfo.name,
     })
+    getApp().globalData.playingId = this.data.musicInfo.id
 
+    //  得到歌曲资源URL后请求数据
     wx.cloud.callFunction({
       name: "music",
       data: {
@@ -82,15 +93,13 @@ Page({
   },
 
   _getMusicInfoFromCache(index) {
+    // 从缓存中加载当前歌曲数据并挂载到data
     const musicList = wx.getStorageSync('musiclist')
     const musicInfo = musicList[index]
-    console.log('index===>', index)
-    // console.log(musicInfo)
     this.setData({
       musicInfo: musicInfo,
       listLength: musicList.length
     })
-    console.log('===>', musicInfo)
   },
 
   togglePlay() {
@@ -104,54 +113,5 @@ Page({
     } else {
       player.pause()
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
   }
 })

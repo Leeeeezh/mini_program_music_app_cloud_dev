@@ -2,7 +2,7 @@
 <view class="container">
   <view class="bg" style="background:url({{musicInfo.al.picUrl}}) center/cover no-repeat;"></view>
 
-  <view class="content">
+  <view class="content {{nextFlag?'nextSlide':''}} {{prevFlag?'prevSlide':''}}">
     <view class="disc rotation {{isPlaying?'':'rotationPaused'}}">
       <image class="cover" src="{{musicInfo.al.picUrl}}"></image>
     </view>

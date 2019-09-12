@@ -15,8 +15,8 @@ Page({
     },
     playingId: -1
   },
-  play(event){
-    const currentId = event.currentTarget.dataset.id 
+  play(event) {
+    const currentId = event.currentTarget.dataset.id
     const index = event.currentTarget.dataset.index
     this.setData({
       playingId: currentId
@@ -27,6 +27,7 @@ Page({
     })
   },
   navToJumbo() {
+    //  导航到歌单描述完全展示页面
     let img = this.data.listInfo.coverImgUrl
     let name = this.data.listInfo.name
     let desc = this.data.listInfo.description
@@ -75,7 +76,14 @@ Page({
       // console.log(playlist.tracks)
     })
   },
-  _setMusicList(){
+  onShow() {
+    // console.log('onShow')
+    //  页面显示时更新正在播放歌曲的高亮样式
+    this.setData({
+      playingId: getApp().globalData.playingId
+    })
+  },
+  _setMusicList() {
     wx.setStorageSync('musiclist', this.data.musiclist)
   }
 })

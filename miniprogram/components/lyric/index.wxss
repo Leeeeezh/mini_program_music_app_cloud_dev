@@ -1,0 +1,13 @@
+/* components/lyric/index.wxss */
+
+.container {
+  width: 100vw;
+  height: 62vh;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

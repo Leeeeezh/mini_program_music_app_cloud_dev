@@ -1,0 +1,6 @@
+<!--components/lyric/index.wxml-->
+<view class="container" hidden="{{!isLyricShow}}">
+ <scroll-view>
+ 
+ </scroll-view>
+</view>

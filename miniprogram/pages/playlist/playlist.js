@@ -26,6 +26,7 @@ Page({
   onLoad: function(options) {
     this._getPlayList()
   },
+
   navToSearch() {
     wx.navigateTo({
       url: '../../pages/search/search',
@@ -130,7 +131,6 @@ Page({
         $url: 'playlist'
       }
     }).then(res => {
-      // console.log(res)
       if (res.result.data.length === 0) {
         wx.hideLoading()
         wx.showToast({

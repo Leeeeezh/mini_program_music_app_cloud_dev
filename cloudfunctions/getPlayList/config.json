@@ -3,7 +3,7 @@
     {
       "name": "getPlayListTrigger",
       "type": "timer",
-      "config": "0 0 */6 * * * *"
+      "config": "0 0 * * * * *"
     }
   ]
 }

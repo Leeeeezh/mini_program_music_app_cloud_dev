@@ -11,9 +11,10 @@ Page({
     progressValue: 0, //进度0~100
     duration: '??:??', //歌曲时长 单位秒
     currentTime: 0, //单位秒
-    progressBarRefreshFlag: true,
-
-    secondWatcher: true
+    progressBarRefreshFlag: true, //锁进度条更新, 拖动进度条时启用
+    secondWatcher: true, //用于限制当前播放时间的刷新频率
+    isLyricShow: false,
+    lyric: ''
   },
   onLoad: function(options) {
     this._bindPlayerEvent()
@@ -61,6 +62,11 @@ Page({
       this._init(parseInt(this.data.index) - 1)
     }
   },
+  toggleLyric() {
+    this.setData({
+      isLyricShow: !this.data.isLyricShow
+    })
+  },
   _initAnimation(direction) {
     //  触发歌曲切换动画
     this.setData({
@@ -106,6 +112,22 @@ Page({
       player.singer = this.data.musicInfo.ar[0].name
       player.epname = this.data.musicInfo.al.name
     })
+
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId: this.data.musicInfo.id,
+        $url: 'lyric'
+      }
+    }).then(res => {
+      let lyric = JSON.parse(res.result).lrc.lyric
+      if(!lyric){
+        lyric = '暂无歌词'
+      }
+      this.setData({
+        lyric: lyric
+      })
+    })
   },
 
   _getMusicInfoFromCache(index) {
@@ -140,10 +162,9 @@ Page({
           progressValue: ~~(player.currentTime * 100 / player.duration)
         })
         this.data.secondWatcher = false
-        setTimeout(()=>{
+        setTimeout(() => {
           this.data.secondWatcher = true
-        },400)
-        console.log(player.currentTime)
+        }, 400)
       }
     })
 
@@ -156,13 +177,11 @@ Page({
     player.onCanplay(() => {
       wx.hideLoading()
       if (typeof player.duration != 'undefined') {
-        // console.log(player.duration)
         this.setData({
           duration: player.duration
         })
       } else {
         setTimeout(() => {
-          // console.log(player.duration)
           this.setData({
             duration: player.duration
           })
@@ -170,10 +189,10 @@ Page({
       }
     })
 
-    player.onNext(()=>{
+    player.onNext(() => {
       this.nextMusic()
     })
-    player.onNext(()=>{
+    player.onNext(() => {
       this.prevMusic()
     })
   },

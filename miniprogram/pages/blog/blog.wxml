@@ -1,4 +1,4 @@
 <!--pages/blog/blog.wxml-->
 <view class="container">
-  <van-slider value="50" bind:change="onChange" />
+  <text>施工中</text>
 </view>

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "van-slider": "vant-weapp/slider",
-    "van-notice-bar": "vant-weapp/notice-bar"
+    "van-notice-bar": "vant-weapp/notice-bar",
+    "comp-lyric": "../../components/lyric/index"
   }
 }

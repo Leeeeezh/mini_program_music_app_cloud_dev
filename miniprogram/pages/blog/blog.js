@@ -12,14 +12,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+      name: 'test'
+    }).then(res=>{
+      console.log(res)
+    })
   },
-  onChange(event) {
-    wx.showToast({
-      icon: 'none',
-      title: `当前值：${event.detail}`
-    });
-  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

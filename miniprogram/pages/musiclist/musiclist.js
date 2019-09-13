@@ -1,10 +1,6 @@
 // pages/musiclist/musiclist.js
 const player = wx.getBackgroundAudioManager()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     playlistId: 0,
     musiclist: [],

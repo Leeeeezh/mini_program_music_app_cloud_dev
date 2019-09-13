@@ -11,6 +11,7 @@ exports.main = async(event, context) => {
   const playListNew = await requsetPromise(url).then(res => {
     return JSON.parse(res).result
   })
+  // console.log("pl===>plNew",playListNew)
 
   //  分批读取数据库中的歌单数据
   const dataCount = (await playListCollection.count()).total
@@ -26,6 +27,7 @@ exports.main = async(event, context) => {
     playListDB = (await Promise.all(tasks)).reduce((acc, cur) => {
       return acc.data.concat(cur.data)
     }).data
+    // console.log("plDB====>",playListDB)
   }
 
   // 检查重复数据
@@ -33,7 +35,8 @@ exports.main = async(event, context) => {
   for (let i of playListNew) {
     let duplicated = false
     for (let j of playListDB) {
-      if (playListNew.id === playListDB.id) {
+      if (j.id === i.id) {
+        console.log(j.id, '<===重复===>', i.id)
         duplicated = true
         break
       }
@@ -42,6 +45,7 @@ exports.main = async(event, context) => {
       filtedData.push(i)
     }
   }
+  console.log(`新增${filtedData.length}条数据`)
 
   //插入数据库
   for (let item of filtedData) {
@@ -51,9 +55,8 @@ exports.main = async(event, context) => {
         createdTime: db.serverDate()
       }
     }).then(res => {
-      console.log('推荐歌单数据+1')
     }).catch(err => {
-      console.log('推荐歌单数据获取失败')
+      console.log(err)
     })
   }
 

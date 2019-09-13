@@ -7,15 +7,15 @@
   <view class="content {{nextFlag?'nextSlide':''}} {{prevFlag?'prevSlide':''}}">
     <view class="header">
       <van-notice-bar left-icon="audio" color="rgba(127, 255, 212, 1)" backgroundColor="rgba(0,0,0,0)" text="{{musicInfo.name}} - {{musicInfo.ar[0].name}} {{musicInfo.alia[0]}}" />
-      <!-- <text class="name">{{musicInfo.name}}</text>
-      <text class="singer">{{musicInfo.ar[0].name}}</text> -->
     </view>
 
     <!-- 封面 -->
-    <view class="body">
-      <view class="disc rotation {{isPlaying?'':'rotationPaused'}}">
+    <view class="body" bind:tap="toggleLyric">
+      <view hidden="{{isLyricShow}}" class="disc rotation {{isPlaying?'':'rotationPaused'}}">
         <image class="cover" src="{{musicInfo.al.picUrl}}"></image>
       </view>
+
+      <comp-lyric isLyricShow="{{isLyricShow}}" lyric="{{lyric}}"/>
     </view>
   </view>
 

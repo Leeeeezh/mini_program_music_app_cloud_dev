@@ -1,4 +1,4 @@
 <!--pages/profile/profile.wxml-->
 <view class="container" >
-  <image src="../../images/liu.png"></image>
+  <text>施工中</text>
 </view>

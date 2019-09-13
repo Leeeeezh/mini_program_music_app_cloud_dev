@@ -16,7 +16,8 @@ Page({
       }
     ],
     playlists: [],
-    loadMoreLock: false
+    loadMoreLock: false,
+    isToTopBtnShow: false
   },
 
   /**
@@ -24,6 +25,31 @@ Page({
    */
   onLoad: function(options) {
     this._getPlayList()
+  },
+  navToSearch() {
+    wx.navigateTo({
+      url: '../../pages/search/search',
+    })
+  },
+
+  onPageScroll: function(event) {
+    //  监听滚动事件,滚动到一定距离后显示返回顶部按钮
+    let scrollTop = event.scrollTop
+    // console.log(scrollTop)
+    if (scrollTop > 600) {
+      this.setData({
+        isToTopBtnShow: true
+      })
+    } else {
+      this.setData({
+        isToTopBtnShow: false
+      })
+    }
+  },
+  scrollToTop() {
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

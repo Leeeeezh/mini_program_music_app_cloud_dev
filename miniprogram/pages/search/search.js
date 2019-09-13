@@ -1,4 +1,4 @@
-// pages/blog/blog.js
+// pages/search/search.js
 Page({
 
   /**
@@ -13,12 +13,6 @@ Page({
    */
   onLoad: function (options) {
 
-  },
-  onChange(event) {
-    wx.showToast({
-      icon: 'none',
-      title: `当前值：${event.detail}`
-    });
   },
 
   /**

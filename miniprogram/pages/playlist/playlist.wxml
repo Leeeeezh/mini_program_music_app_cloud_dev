@@ -1,5 +1,13 @@
 <!--pages/playlist/playlist.wxml-->
 <view class="container">
+  <view class="toTop {{isToTopBtnShow?'':'toTopHide'}}" bind:tap="scrollToTop">
+    <span class="iconfont icon-huidaodingbu"></span>
+  </view>
+  <view class="search" bind:tap="navToSearch">
+    <view class="wrap">
+      <text>🔍搜索</text>
+    </view>
+  </view>
   <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="2000" circular="{{true}}" class="swiper" indicator-color="rgba(0, 0, 0 ,.2)" indicator-active-color="#64edac">
     <block wx:for="{{swiperImgUrls}}" wx:key="">
       <swiper-item>

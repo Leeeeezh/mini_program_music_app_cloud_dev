@@ -1,2 +1,4 @@
 <!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<view class="container" >
+  <image src="../../images/liu.png"></image>
+</view>

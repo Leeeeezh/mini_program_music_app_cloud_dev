@@ -1,4 +1,5 @@
 // pages/musiclist/musiclist.js
+const player = wx.getBackgroundAudioManager()
 Page({
 
   /**
@@ -16,8 +17,15 @@ Page({
     playingId: -1
   },
   play(event) {
+    //  当前点击的歌曲的id
     const currentId = event.currentTarget.dataset.id
+    
     const index = event.currentTarget.dataset.index
+    //  正在播放的歌曲的id
+    const playingId = getApp().globalData.playingId
+    if(playingId!=currentId) {
+      player.stop()
+    }
     this.setData({
       playingId: currentId
     })
@@ -39,14 +47,8 @@ Page({
     wx.navigateTo({
       url: '../../pages/jumbo/jumbo',
     })
-
-    // console.log(img)
-    // wx.navigateTo({
-    //   url: `../../pages/jumbo/jumbo?img=${img}&name=${name}&desc=${desc}`,
-    // })
   },
   onLoad: function(options) {
-    // console.log(getApp().globalData.playingId)
     this.setData({
       playlistId: options.playlistId,
       playingId: getApp().globalData.playingId
@@ -73,11 +75,9 @@ Page({
       })
       wx.hideLoading()
       this._setMusicList()
-      // console.log(playlist.tracks)
     })
   },
   onShow() {
-    // console.log('onShow')
     //  页面显示时更新正在播放歌曲的高亮样式
     this.setData({
       playingId: getApp().globalData.playingId

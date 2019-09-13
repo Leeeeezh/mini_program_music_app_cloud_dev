@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "comp-playlist": "../../components/playlist/index",
-    "comp-title": "../../components/title/index"
+    "comp-title": "../../components/title/index",
+    "van-search": "vant-weapp/search"
   },
   "enablePullDownRefresh": true
 }

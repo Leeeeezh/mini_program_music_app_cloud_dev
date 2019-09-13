@@ -1,22 +1,37 @@
 // pages/player/player.js
-
 const player = wx.getBackgroundAudioManager()
 Page({
   data: {
-    index: 0,
-    musicInfo: {},
-    isPlaying: true,
-    listLength: 0,
-    prevFlag: false,
-    nextFlag: false
+    index: 0, //  当前歌曲在歌单中的索引
+    musicInfo: {}, //  歌曲信息
+    isPlaying: true, //  是否处于播放状态
+    listLength: 0, //  歌单中的歌曲数量
+    prevFlag: false, //  动画触发变量,由false转为true时触发动画
+    nextFlag: false, //  动画触发变量,由false转为true时触发动画
+    progressValue: 0, //进度0~100
+    duration: '??:??', //歌曲时长 单位秒
+    currentTime: 0, //单位秒
+    progressBarRefreshFlag: true,
+
+    secondWatcher: true
   },
   onLoad: function(options) {
+    this._bindPlayerEvent()
     this.setData({
       listLength: wx.getStorageSync('musiclist').length
     })
     this._init(options.index)
   },
-
+  onChange(event) {
+    player.seek(~~(event.detail / 100 * this.data.duration))
+    this.data.progressBarRefreshFlag = true
+  },
+  onDrag(event) {
+    this.data.progressBarRefreshFlag = false
+    this.setData({
+      currentTime: (event.detail.value * this.data.duration) / 100
+    })
+  },
   nextMusic() {
     player.stop()
     this._initAnimation('next')
@@ -65,12 +80,14 @@ Page({
 
   _init(index) {
     this.setData({
-      index: index
+      index: index,
+      duration: '??:??',
+      currentTime: 0,
+      progressValue: 0
     })
     this._getMusicInfoFromCache(index)
-    console.log(this.data)
     wx.setNavigationBarTitle({
-      title: this.data.musicInfo.name,
+      title: `${this.data.musicInfo.name}`,
     })
     getApp().globalData.playingId = this.data.musicInfo.id
 
@@ -82,7 +99,6 @@ Page({
         $url: 'musicUrl'
       }
     }).then(res => {
-      // console.log(res)
       let musicUrl = JSON.parse(res.result).data[0].url
       player.src = musicUrl
       player.title = this.data.musicInfo.name
@@ -101,7 +117,66 @@ Page({
       listLength: musicList.length
     })
   },
+  _bindPlayerEvent() {
+    player.onPause(() => {
+        this.setData({
+          isPlaying: false
+        })
+      }),
+      player.onPlay(() => {
+        this.setData({
+          isPlaying: true
+        })
+      })
 
+    player.onEnded(() => {
+      this.nextMusic()
+    })
+
+    player.onTimeUpdate(() => {
+      if (this.data.progressBarRefreshFlag && this.data.secondWatcher) {
+        this.setData({
+          currentTime: player.currentTime,
+          progressValue: ~~(player.currentTime * 100 / player.duration)
+        })
+        this.data.secondWatcher = false
+        setTimeout(()=>{
+          this.data.secondWatcher = true
+        },400)
+        console.log(player.currentTime)
+      }
+    })
+
+    player.onWaiting(() => {
+      wx.showLoading({
+        title: '拼命加载中>_< ',
+      })
+    })
+
+    player.onCanplay(() => {
+      wx.hideLoading()
+      if (typeof player.duration != 'undefined') {
+        // console.log(player.duration)
+        this.setData({
+          duration: player.duration
+        })
+      } else {
+        setTimeout(() => {
+          // console.log(player.duration)
+          this.setData({
+            duration: player.duration
+          })
+        }, 1000)
+      }
+    })
+
+    player.onNext(()=>{
+      this.nextMusic()
+    })
+    player.onNext(()=>{
+      this.prevMusic()
+    })
+  },
   togglePlay() {
     this.setData({
       isPlaying: !this.data.isPlaying

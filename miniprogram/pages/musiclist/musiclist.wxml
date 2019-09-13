@@ -22,4 +22,5 @@
       <comp-listitem name="{{item.name}}" author="{{item.ar}}" id="{{item.id}}" index="{{index+1}}" class="listitem" alia="{{item.alia}}" isPlaying="{{item.id===playingId}}" data-id="{{item.id}}" data-index="{{index}}" bind:tap="play"/>
     </block>
   </view>
+
 </view>

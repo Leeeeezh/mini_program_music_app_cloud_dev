@@ -26,15 +26,37 @@
   height: 70vh;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header {
+  padding: 10rpx;
+  box-sizing: border-box;
+  width: 100%;
+  height: 8vh;
+  /* background-color: #7fffd411; */
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; */
+}
+
+.body {
+  width: 100%;
+  height: 62vh;
+  color: rgb(127, 255, 212);
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.prevSlide{
+.prevSlide {
   animation: prev 1s ease-in-out;
 }
 
-.nextSlide{
+.nextSlide {
   animation: next 1s ease-in-out;
 }
 
@@ -63,7 +85,6 @@
     transform: translate(0, 0);
   }
 }
-
 
 @keyframes next {
   0% {
@@ -120,16 +141,47 @@
   width: 100vw;
   height: 30vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   /* background-color: rgba(255, 255, 255, 0.5); */
 }
 
+.progressBar {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.progressBar .time{
+  width:10vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progressBar .slider {
+  width: 80vw;
+  flex: 1 0;
+  padding: 0 30rpx;
+}
+
+.btns {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .iconfont {
   color: rgba(100, 237, 172, 0.6);
   font-size: 100rpx;
-  transition: all .1s linear;
+  transition: all 0.1s linear;
 }
 
 .iconfont.icon-pausecircle, .iconfont.icon-playcircle {

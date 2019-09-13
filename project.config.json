@@ -24,8 +24,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.8.2",
-	"appid": "wx6fda8d376437a492",
-	"projectname": "miniprogram-4",
+	"appid": "wx8337085588b31bce",
+	"projectname": "%E8%BD%BB%E5%90%ACMusic",
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"cloudfunctionTemplateRoot": "",
@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -72,6 +72,20 @@
 					"name": "pages/player/player",
 					"pathName": "pages/player/player",
 					"query": "index=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/blog/blog",
+					"pathName": "pages/blog/blog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/player/player",
+					"pathName": "pages/player/player",
+					"query": "index=0",
 					"scene": null
 				}
 			]

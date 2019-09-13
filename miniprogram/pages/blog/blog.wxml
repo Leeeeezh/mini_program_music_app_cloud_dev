@@ -1,2 +1,4 @@
 <!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<view class="container">
+  <van-slider value="50" bind:change="onChange" />
+</view>

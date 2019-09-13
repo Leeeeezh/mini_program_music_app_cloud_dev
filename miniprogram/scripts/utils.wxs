@@ -1,20 +1,34 @@
-var tranNumber = function(num){
-  if(!num){
+var tranNumber = function(num) {
+  if (!num) {
     return
   }
-  if(num<1000){
+  if (num < 1000) {
     return num
   }
 
-  if(num>=10000&&num<100000000){
+  if (num >= 10000 && num < 100000000) {
     return ((num / 10000).toFixed(2) + '万')
   }
 
-  if(num>=100000000){
+  if (num >= 100000000) {
     return ((num / 100000000).toFixed(2) + '亿')
   }
 }
 
+var timeFormater = function (num) {
+  if(num === '??:??') {
+    return '??:??'
+  }
+  var numFixed = Math.floor(num)
+  var minute = parseInt(numFixed / 60)
+  var second = numFixed % 60
+
+  minute = minute < 10 ? '0' + minute : minute
+  second = second < 10 ? '0' + second : second
+  return minute + ':' + second
+}
+
 module.exports = {
-  tranNumber: tranNumber
+  tranNumber: tranNumber,
+  timeFormater: timeFormater
 }

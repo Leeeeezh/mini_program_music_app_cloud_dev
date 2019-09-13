@@ -5,7 +5,8 @@
     "pages/profile/profile",
     "pages/musiclist/musiclist",
     "pages/jumbo/jumbo",
-    "pages/player/player"
+    "pages/player/player",
+    "pages/search/search"
   ],
   "tabBar": {
     "color": "#95b7c9",

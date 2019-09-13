@@ -1,1 +1,10 @@
 /* pages/profile/profile.wxss */
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+image{
+  width:100vw;
+  height: 600rpx;
+}

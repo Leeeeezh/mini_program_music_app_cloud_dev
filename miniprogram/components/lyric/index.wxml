@@ -1,6 +1,39 @@
-<!--components/lyric/index.wxml-->
+<!--comtextonents/lyric/index.wxml-->
 <view class="container" hidden="{{!isLyricShow}}">
- <scroll-view>
- 
+ <scroll-view scroll-y>
+  <view class="content">
+    <text>{{lyric}}</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+    <text>测试</text>
+  </view>
  </scroll-view>
 </view>

@@ -21,7 +21,7 @@ Page({
     this.setData({
       listLength: wx.getStorageSync('musiclist').length
     })
-    this._init(options.index)
+    this._init(parseInt(options.index), parseInt(options.id))
   },
   onChange(event) {
     player.seek(~~(event.detail / 100 * this.data.duration))
@@ -84,50 +84,74 @@ Page({
     }
   },
 
-  _init(index) {
+  _init(index, id) {
     this.setData({
       index: index,
       duration: '??:??',
       currentTime: 0,
-      progressValue: 0
+      progressValue: 0,
+      lyric: getApp().globalData.lyric
     })
     this._getMusicInfoFromCache(index)
     wx.setNavigationBarTitle({
       title: `${this.data.musicInfo.name}`,
     })
-    getApp().globalData.playingId = this.data.musicInfo.id
-
-    //  得到歌曲资源URL后请求数据
-    wx.cloud.callFunction({
-      name: "music",
-      data: {
-        musicId: this.data.musicInfo.id,
-        $url: 'musicUrl'
-      }
-    }).then(res => {
-      let musicUrl = JSON.parse(res.result).data[0].url
-      player.src = musicUrl
-      player.title = this.data.musicInfo.name
-      player.coverImgUrl = this.data.musicInfo.al.picUrl
-      player.singer = this.data.musicInfo.ar[0].name
-      player.epname = this.data.musicInfo.al.name
-    })
-
-    wx.cloud.callFunction({
-      name: 'music',
-      data: {
-        musicId: this.data.musicInfo.id,
-        $url: 'lyric'
-      }
-    }).then(res => {
-      let lyric = JSON.parse(res.result).lrc.lyric
-      if(!lyric){
-        lyric = '暂无歌词'
-      }
-      this.setData({
-        lyric: lyric
+    if (id != getApp().globalData.playingId) {
+      console.log('Start Download Resource')
+      wx.cloud.callFunction({
+        name: "music",
+        data: {
+          musicId: this.data.musicInfo.id,
+          $url: 'musicUrl'
+        }
+      }).then(res => {
+        let musicUrl = JSON.parse(res.result).data[0].url
+        console.log(musicUrl)
+        // 处理musicUrl为null的情况
+        if (!musicUrl) {
+          wx.showToast({
+            title: '此歌曲暂无法播放',
+            icon: 'none',
+            duration: 1500
+          })
+          this.setData({
+            isPlaying: false
+          })
+          setTimeout(() => {
+            this.nextMusic()
+          }, 2000)
+          return
+        }
+        player.src = musicUrl
+        player.title = this.data.musicInfo.name
+        player.coverImgUrl = this.data.musicInfo.al.picUrl
+        player.singer = this.data.musicInfo.ar[0].name
+        player.epname = this.data.musicInfo.al.name
       })
-    })
+
+      wx.cloud.callFunction({
+        name: 'music',
+        data: {
+          musicId: this.data.musicInfo.id,
+          $url: 'lyric'
+        }
+      }).then(res => {
+        let lyric = JSON.parse(res.result).lrc.lyric
+        if (!lyric) {
+          lyric = '暂无歌词'
+        }
+        this.setData({
+          lyric: lyric
+        })
+        getApp().globalData.lyric = lyric
+      })
+      getApp().globalData.playingId = this.data.musicInfo.id
+      getApp().globalData.playingIndex = this.data.musicInfo.index
+    } else {
+      console.log('The music is being played')
+    }
+    //  得到歌曲资源URL后请求数据
+
   },
 
   _getMusicInfoFromCache(index) {

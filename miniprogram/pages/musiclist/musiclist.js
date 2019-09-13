@@ -25,9 +25,9 @@ Page({
     this.setData({
       playingId: currentId
     })
-    getApp().globalData.playingId = currentId
+    // getApp().globalData.playingId = currentId
     wx.navigateTo({
-      url: `../../pages/player/player?index=${index}`,
+      url: `../../pages/player/player?index=${index}&id=${this.data.musiclist[index].id}`,
     })
   },
   navToJumbo() {

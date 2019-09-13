@@ -11,3 +11,15 @@
   align-items: center;
   justify-content: center;
 }
+
+scroll-view {
+  height: 62vh;
+}
+
+.content {
+  width: 100vw;
+}
+text{
+  display: block;
+  text-align: center;
+}

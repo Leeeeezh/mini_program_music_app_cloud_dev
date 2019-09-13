@@ -14,7 +14,7 @@
       <view hidden="{{isLyricShow}}" class="disc rotation {{isPlaying?'':'rotationPaused'}}">
         <image class="cover" src="{{musicInfo.al.picUrl}}"></image>
       </view>
-
+      <!-- 歌词 -->
       <comp-lyric isLyricShow="{{isLyricShow}}" lyric="{{lyric}}"/>
     </view>
   </view>

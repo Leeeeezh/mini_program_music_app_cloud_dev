@@ -19,6 +19,8 @@ App({
       name: '',
       desc: ''
     },
-    playingId: -1
+    lyric: '加载中',
+    playingId: -1,
+    playingIndex: -1
   }
 })

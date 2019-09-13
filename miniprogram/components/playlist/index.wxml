@@ -4,7 +4,7 @@
   <image class="img" src="{{playlist.picUrl}}"></image>
   <view class="playCount">
     <image class="icon" src="../../icons/music-white.png"></image>
-    <text>{{utils.tranNumber(playlist.playCount)}}</text>
+    <text>{{utils.tranNumber(playlist.playCount)}}次播放</text>
   </view>
   <view class="name"><text>{{playlist.name}}</text></view>
 </view>

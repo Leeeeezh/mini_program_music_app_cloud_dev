@@ -1,4 +1,5 @@
 // pages/player/player.js
+// const glbData = getApp().globalData
 const player = wx.getBackgroundAudioManager()
 Page({
   data: {
@@ -14,28 +15,42 @@ Page({
     progressBarRefreshFlag: true, //锁进度条更新, 拖动进度条时启用
     secondWatcher: true, //用于限制当前播放时间的刷新频率
     isLyricShow: false,
-    lyric: ''
+    lyric: '',
+    isLiked: false,
+    playMode: 1, // 1顺序;0循环,
+    playModeToast: ['单曲循环', '顺序播放']
   },
   onLoad: function(options) {
     this._bindPlayerEvent()
     this.setData({
       listLength: wx.getStorageSync('musiclist').length,
     })
-    console.log(this.data.duration)
+    // console.log(this.data.duration)
     this._init(parseInt(options.index), parseInt(options.id))
   },
+  // 进度条改变
   onChange(event) {
     player.seek(~~(event.detail / 100 * this.data.duration))
     this.data.progressBarRefreshFlag = true
   },
+  //松开进度条
   onDrag(event) {
     this.data.progressBarRefreshFlag = false
     this.setData({
       currentTime: (event.detail.value * this.data.duration) / 100
     })
   },
+  // 下一曲
   nextMusic() {
     player.stop()
+    this.setData({
+      lyric: ''
+    })
+    console.log(this.data.playMode)
+    if (this.data.playMode === 0) {
+      this._init(parseInt(this.data.index))
+      return
+    }
     this._initAnimation('next')
 
     if (this.data.index === this.data.listLength - 1) {
@@ -49,8 +64,12 @@ Page({
       this._init(parseInt(this.data.index) + 1)
     }
   },
+  // 上一曲
   prevMusic() {
     player.stop()
+    this.setData({
+      lyric: ''
+    })
     this._initAnimation('prev')
     if (parseInt(this.data.index) === 0) {
       wx.showToast({
@@ -63,9 +82,43 @@ Page({
       this._init(parseInt(this.data.index) - 1)
     }
   },
+  // 歌词显示切换
   toggleLyric() {
     this.setData({
       isLyricShow: !this.data.isLyricShow
+    })
+  },
+  //切换播放模式:单曲/顺序/随机
+  togglePlayMode() {
+    let playMode = this.data.playMode
+    console.log('Change Play Mode')
+    if (playMode === 1) {
+      this.setData({
+        playMode: 0
+      })
+    }
+
+    if (playMode === 0) {
+      this.setData({
+        playMode: 1
+      })
+    }
+    wx.showToast({
+      title: this.data.playModeToast[this.data.playMode],
+      icon: 'none',
+      duration: 2000
+    })
+  },
+
+  onLike() {
+    this.setData({
+      isLiked: !this.data.isLiked
+    })
+
+    this.data.isLiked && wx.showToast({
+      title: '已收藏',
+      duration: 2000,
+      icon: 'none'
     })
   },
   _initAnimation(direction) {
@@ -107,7 +160,7 @@ Page({
         }
       }).then(res => {
         let musicUrl = JSON.parse(res.result).data[0].url
-        console.log(musicUrl)
+        // console.log(musicUrl)
         // 处理musicUrl为null的情况
         if (!musicUrl) {
           wx.showToast({
@@ -201,7 +254,7 @@ Page({
 
     player.onCanplay(() => {
       wx.hideLoading()
-      if (typeof player. tion != 'undefined') {
+      if (typeof player.tion != 'undefined') {
         this.setData({
           duration: player.duration
         })

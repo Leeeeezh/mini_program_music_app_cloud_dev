@@ -16,11 +16,16 @@
         <image class="cover" src="{{musicInfo.al.picUrl}}"></image>
       </view>
       <!-- 歌词 -->
-      <comp-lyric isLyricShow="{{isLyricShow}}" lyric="{{lyric}}"/>
+      <comp-lyric isLyricShow="{{isLyricShow}}" lyric="{{lyric}}" second="{{currentTime}}" />
     </view>
   </view>
 
   <view class="controller">
+    <!-- 按钮组1 -->
+    <view class="mode">
+      <span class="iconfont icon-aixin {{isLiked?'liked':''}}" bind:tap="onLike"></span>
+      <span class="iconfont {{playMode===1?'icon-paixu':''}}  {{playMode===0?'icon-danquxunhuan':''}}" bind:tap="togglePlayMode"></span>
+    </view>
     <!-- 进度条 -->
     <view class="progressBar">
       <view class="time">
@@ -33,7 +38,8 @@
         <text>{{utils.timeFormater(duration)}}</text>
       </view>
     </view>
-    <!-- 按钮 -->
+
+    <!-- 按钮组2 -->
     <view class="btns">
       <span class="iconfont icon-angle-left" bind:tap="prevMusic"></span>
       <span class="iconfont {{isPlaying?'icon-pausecircle':'icon-playcircle'}}" bind:tap="togglePlay"></span>

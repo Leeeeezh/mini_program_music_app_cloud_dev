@@ -5,21 +5,32 @@
   height: 62vh;
   box-sizing: border-box;
   padding: 0 20rpx;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-scroll-view {
+.scrollView {
   height: 62vh;
+}
+
+.placeholder {
+  width: 100;
+  height: 31vh;
 }
 
 .content {
   width: 100vw;
 }
-text{
+
+text {
+  font-size: 36rpx;
+  line-height: 60rpx;
   display: block;
   text-align: center;
+}
+
+.highlight {
+  color: rgba(255, 193, 7, 1);
 }

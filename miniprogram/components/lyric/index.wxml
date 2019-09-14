@@ -1,39 +1,12 @@
 <!--comtextonents/lyric/index.wxml-->
 <view class="container" hidden="{{!isLyricShow}}">
- <scroll-view scroll-y>
-  <view class="content">
-    <text>{{lyric}}</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-    <text>测试</text>
-  </view>
- </scroll-view>
+  <scroll-view class="scrollView" scroll-y="{{true}}" scroll-with-animation="{{true}}" scroll-top="{{scrollTop}}">
+    <view class="placeholder"></view>
+    <block wx:for="{{lrcList}}" wx:key="">
+      <view class="lrc" class="{{index===activedIndex?'highlight':''}}">
+        <text>{{item.lrc}}</text>
+      </view>
+    </block>
+    <view class="placeholder"></view>
+  </scroll-view>
 </view>

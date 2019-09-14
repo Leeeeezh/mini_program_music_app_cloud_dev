@@ -1,7 +1,9 @@
 /* pages/musiclist/musiclist.wxss */
 .container {
   width: 100%;
+  min-height: 100vh;
   position: relative;
+  background-color: #121826;
 }
 
 .head {

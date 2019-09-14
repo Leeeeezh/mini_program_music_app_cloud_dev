@@ -68,7 +68,7 @@
 }
 
 .active {
-  background-color: rgba(18, 24, 38, 0.9);
+  background-color: rgba(133, 143, 168, 0.1);
 }
 
 .active .name {

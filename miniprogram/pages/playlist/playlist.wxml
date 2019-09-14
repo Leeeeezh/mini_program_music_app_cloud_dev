@@ -1,5 +1,6 @@
 <!--pages/playlist/playlist.wxml-->
 <view class="container">
+  <!-- 返回顶部按钮 -->
   <view class="toTop {{isToTopBtnShow?'':'toTopHide'}}" bind:tap="scrollToTop">
     <span class="iconfont icon-huidaodingbu"></span>
   </view>
@@ -8,7 +9,7 @@
       <text>🔍搜索</text>
     </view>
   </view>
-  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="2000" circular="{{true}}" class="swiper" indicator-color="rgba(0, 0, 0 ,.2)" indicator-active-color="#64edac">
+  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="2000" circular="{{true}}" class="swiper" indicator-color="rgba(0, 0, 0 ,.2)" indicator-active-color="rgba(255, 193, 7, 1)">
     <block wx:for="{{swiperImgUrls}}" wx:key="">
       <swiper-item>
         <image src="{{item.url}}" mode="widthFix"></image>

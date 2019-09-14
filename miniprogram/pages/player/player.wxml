@@ -5,8 +5,9 @@
   <view class="bg" style="background:url({{musicInfo.al.picUrl}}) center/cover no-repeat;"></view>
 
   <view class="content {{nextFlag?'nextSlide':''}} {{prevFlag?'prevSlide':''}}">
+    <!-- 头部 -->
     <view class="header">
-      <van-notice-bar left-icon="audio" color="rgba(127, 255, 212, 1)" backgroundColor="rgba(0,0,0,0)" text="{{musicInfo.name}} - {{musicInfo.ar[0].name}} {{musicInfo.alia[0]}}" />
+      <van-notice-bar left-icon="audio" color="rgba(149, 183, 201, 1)" backgroundColor="rgba(0,0,0,0)" text="{{musicInfo.name}} - {{musicInfo.ar[0].name}} {{musicInfo.alia[0]}}" />
     </view>
 
     <!-- 封面 -->
@@ -26,7 +27,7 @@
         <text>{{utils.timeFormater(currentTime)}}</text>
       </view>
       <view class="slider">
-        <van-slider value="{{progressValue}}" bar-height="10rpx" active-color="#64edac" inactive-color="rgba(99, 236, 172,.3)" bind:change="onChange" bind:drag="onDrag" />
+        <van-slider value="{{progressValue}}" bar-height="10rpx" active-color="rgb(149, 183, 201)" inactive-color="rgba(149, 183, 201,.3)" bind:change="onChange" bind:drag="onDrag" />
       </view>
       <view class="time">
         <text>{{utils.timeFormater(duration)}}</text>

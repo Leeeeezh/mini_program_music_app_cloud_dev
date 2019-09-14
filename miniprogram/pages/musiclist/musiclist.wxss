@@ -41,6 +41,7 @@
   width: 400rpx;
   height: 400rpx;
   border-radius: 10rpx;
+  box-shadow: 20rpx 0rpx 0 -6rpx rgba(255, 193, 7, .6);
 }
 
 .name {

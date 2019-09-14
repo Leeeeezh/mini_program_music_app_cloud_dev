@@ -1,14 +1,15 @@
 /* pages/playlist/playlist.wxss */
 
 .container {
-  background-color: #fff;
+  background-color: #1f2734;
+  min-height: 100vh;
   position: relative;
 }
 .text {
 color:rgb(99, 236, 172)
 }
 .toTop {
-  background-color: white;
+  background-color: #1f2734;
   width: 160rpx;
   height: 160rpx;
   padding: 0;
@@ -21,14 +22,14 @@ color:rgb(99, 236, 172)
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-shadow:  0 0 10rpx #64edac;
+  box-shadow:  0 0 10rpx #1f2734;
 
   transition: all .3s ease-in-out;
 }
 
 .icon-huidaodingbu {
   font-size: 180rpx;
-  color: #64edac;
+  color: #ffc107;
 }
 
 .toTopHide {
@@ -47,7 +48,7 @@ color:rgb(99, 236, 172)
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: #1f2734;
   box-sizing: border-box;
 }
 

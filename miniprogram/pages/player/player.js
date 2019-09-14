@@ -19,8 +19,9 @@ Page({
   onLoad: function(options) {
     this._bindPlayerEvent()
     this.setData({
-      listLength: wx.getStorageSync('musiclist').length
+      listLength: wx.getStorageSync('musiclist').length,
     })
+    console.log(this.data.duration)
     this._init(parseInt(options.index), parseInt(options.id))
   },
   onChange(event) {
@@ -87,7 +88,7 @@ Page({
   _init(index, id) {
     this.setData({
       index: index,
-      duration: '??:??',
+      duration: player.duration,
       currentTime: 0,
       progressValue: 0,
       lyric: getApp().globalData.lyric
@@ -200,7 +201,7 @@ Page({
 
     player.onCanplay(() => {
       wx.hideLoading()
-      if (typeof player.duration != 'undefined') {
+      if (typeof player. tion != 'undefined') {
         this.setData({
           duration: player.duration
         })

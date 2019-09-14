@@ -1,0 +1,5 @@
+<!--components/toplayer/toplayer.wxml-->
+<view class="container" bind:tap="navToPlayer">
+  <span class="iconfont icon-playcircle"></span>
+  <text class="musicTitle">{{musicTitle}}</text>
+</view>

@@ -4,7 +4,7 @@
     <view class="placeholder"></view>
     <block wx:for="{{lrcList}}" wx:key="">
       <view class="lrc" class="{{index===activedIndex?'highlight':''}}">
-        <text>{{item.lrc}}</text>
+        <text>{{item.lrc?item.lrc:item}}</text>
       </view>
     </block>
     <view class="placeholder"></view>

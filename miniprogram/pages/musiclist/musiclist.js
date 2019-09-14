@@ -15,10 +15,12 @@ Page({
   play(event) {
     //  当前点击的歌曲的id
     const currentId = event.currentTarget.dataset.id
-    
+    console.log('currentId',currentId)
     const index = event.currentTarget.dataset.index
+    // wx.setStorageSync('playingId',currentId)
+    // wx.setStorageSync('playingIndex', index)
     //  正在播放的歌曲的id
-    const playingId = getApp().globalData.playingId
+    const playingId = wx.getStorageSync('playingId')
     if(playingId!=currentId) {
       player.stop()
     }
@@ -27,7 +29,7 @@ Page({
     })
     // getApp().globalData.playingId = currentId
     wx.navigateTo({
-      url: `../../pages/player/player?index=${index}&id=${this.data.musiclist[index].id}`,
+      url: `../../pages/player/player?index=${index}&id=${currentId}`,
     })
   },
   navToJumbo() {

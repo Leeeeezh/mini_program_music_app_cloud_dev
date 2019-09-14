@@ -15,7 +15,16 @@ Component({
         activedIndex: -1,
         scrollTop: 0
       })
-      this._parseLyric(lrc)
+      if (lrc === '暂无歌词') {
+        // console.log(lrc)
+        this.setData({
+          lrcList: [lrc]
+        })
+        // console.log(this.data.lrcList)
+      } else {
+        this._parseLyric(lrc)
+      }
+
     },
 
     //  实时更新高亮歌词,second:歌曲已播放秒数
@@ -74,7 +83,7 @@ Component({
       this.setData({
         lrcList
       })
-      console.log(this.data.lrcList)
+      // console.log(this.data.lrcList)
     }
   }
 })

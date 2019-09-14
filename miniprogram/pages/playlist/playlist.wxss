@@ -15,7 +15,7 @@ color:rgb(99, 236, 172)
   padding: 0;
   border-radius: 50%;
   position: fixed;
-  bottom: 100rpx;
+  bottom: 160rpx;
   right: 60rpx;
   z-index: 200;
   display: flex;
@@ -80,4 +80,13 @@ image {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.toPlayer {
+  position: fixed;
+  right: 0;
+  bottom: 20rpx;
+  z-index: 300;
+  border-radius: 40rpx;
+  border: 10rpx solid rgb(31, 39, 52);
 }

@@ -26,12 +26,16 @@ Page({
       listLength: wx.getStorageSync('musiclist').length,
     })
     // console.log(this.data.duration)
-    this._init(parseInt(options.index), parseInt(options.id))
+    console.log('传入的index和id', parseInt(options.index), parseInt(options.id))
+    this._init(parseInt(options.index), parseInt(options.id), options.forceplay)
   },
   // 进度条改变
   onChange(event) {
+    this.data.progressBarRefreshFlag = false
     player.seek(~~(event.detail / 100 * this.data.duration))
-    this.data.progressBarRefreshFlag = true
+    setTimeout(() => {
+      this.data.progressBarRefreshFlag = true
+    }, 500)
   },
   //松开进度条
   onDrag(event) {
@@ -39,15 +43,18 @@ Page({
     this.setData({
       currentTime: (event.detail.value * this.data.duration) / 100
     })
+    setTimeout(() => {
+      this.data.progressBarRefreshFlag = true
+    }, 500)
   },
   // 下一曲
-  nextMusic() {
+  nextMusic(event) {
     player.stop()
     this.setData({
       lyric: ''
     })
-    console.log(this.data.playMode)
-    if (this.data.playMode === 0) {
+    // console.log(this.data.playMode)
+    if (this.data.playMode === 0 && !event) {
       this._init(parseInt(this.data.index))
       return
     }
@@ -91,7 +98,7 @@ Page({
   //切换播放模式:单曲/顺序/随机
   togglePlayMode() {
     let playMode = this.data.playMode
-    console.log('Change Play Mode')
+    // console.log('Change Play Mode')
     if (playMode === 1) {
       this.setData({
         playMode: 0
@@ -138,20 +145,25 @@ Page({
     }
   },
 
-  _init(index, id) {
+  _init(index, id, forceplay) {
     this.setData({
       index: index,
       duration: player.duration,
       currentTime: 0,
       progressValue: 0,
-      lyric: getApp().globalData.lyric
+      // lyric: getApp().globalData.lyric
+      lyric: wx.getStorageSync('lyric')
     })
     this._getMusicInfoFromCache(index)
     wx.setNavigationBarTitle({
       title: `${this.data.musicInfo.name}`,
     })
-    if (id != getApp().globalData.playingId) {
-      console.log('Start Download Resource')
+    if (forceplay === 'true' || id != wx.getStorageSync('playingId')) {
+      // console.log('Start Download Resource')
+      //  加载歌曲数据
+      if(forceplay==='true'){
+        player.play()
+      }
       wx.cloud.callFunction({
         name: "music",
         data: {
@@ -176,13 +188,18 @@ Page({
           }, 2000)
           return
         }
-        player.src = musicUrl
+        if (forceplay != "true") {
+          player.src = musicUrl
+        }
         player.title = this.data.musicInfo.name
         player.coverImgUrl = this.data.musicInfo.al.picUrl
         player.singer = this.data.musicInfo.ar[0].name
         player.epname = this.data.musicInfo.al.name
+        wx.setStorageSync('playingId', this.data.musicInfo.id)
+        wx.setStorageSync('playingIndex', index)
+        wx.setStorageSync('musicTitle', this.data.musicInfo.name)
       })
-
+      // 加载歌词数据
       wx.cloud.callFunction({
         name: 'music',
         data: {
@@ -190,22 +207,26 @@ Page({
           $url: 'lyric'
         }
       }).then(res => {
-        let lyric = JSON.parse(res.result).lrc.lyric
-        if (!lyric) {
+        let lyric = ''
+        let lrc = JSON.parse(res.result).lrc
+        if (!lrc) {
           lyric = '暂无歌词'
+          // console.log('No Lyric')
+        } else {
+          lyric = lrc.lyric
+          // console.log('Lyric Exists')
         }
         this.setData({
           lyric: lyric
         })
         getApp().globalData.lyric = lyric
+        wx.setStorageSync('lyric', lyric)
       })
-      getApp().globalData.playingId = this.data.musicInfo.id
-      getApp().globalData.playingIndex = this.data.musicInfo.index
+
     } else {
       console.log('The music is being played')
     }
     //  得到歌曲资源URL后请求数据
-
   },
 
   _getMusicInfoFromCache(index) {
@@ -219,15 +240,17 @@ Page({
   },
   _bindPlayerEvent() {
     player.onPause(() => {
-        this.setData({
-          isPlaying: false
-        })
-      }),
-      player.onPlay(() => {
-        this.setData({
-          isPlaying: true
-        })
+      this.setData({
+        isPlaying: false
       })
+    })
+
+    player.onPlay(() => {
+      console.log('播放器 - 开始播放')
+      this.setData({
+        isPlaying: true
+      })
+    })
 
     player.onEnded(() => {
       this.nextMusic()

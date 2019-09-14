@@ -1,5 +1,4 @@
 /* pages/player/player.wxss */
-
 .container {
   position: relative;
   width: 100vw;

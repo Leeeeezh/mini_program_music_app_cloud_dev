@@ -1,4 +1,5 @@
 // pages/playlist/playlist.js
+const player = wx.getBackgroundAudioManager()
 Page({
 
   /**
@@ -17,7 +18,8 @@ Page({
     ],
     playlists: [],
     loadMoreLock: false,
-    isToTopBtnShow: false
+    isToTopBtnShow: false,
+    musicTitle: ''
   },
 
   /**
@@ -32,7 +34,13 @@ Page({
       url: '../../pages/search/search',
     })
   },
-
+  navToPlayer() {
+    const id = wx.getStorageSync('playingId')
+    const index = wx.getStorageSync('playingIndex')
+    wx.navigateTo({
+      url: `../../pages/player/player?index=${index}&id=${id}`,
+    })
+  },
   onPageScroll: function(event) {
     //  监听滚动事件,滚动到一定距离后显示返回顶部按钮
     let scrollTop = event.scrollTop
@@ -63,7 +71,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({
+      musicTitle: wx.getStorageSync('musicTitle')
+    })
   },
 
   /**

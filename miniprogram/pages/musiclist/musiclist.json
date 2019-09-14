@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "comp-listitem":"../../components/listitem/index"
+    "comp-listitem":"../../components/listitem/index",
+    "comp-toplayer":"../../components/toplayer/index"
   }
 }

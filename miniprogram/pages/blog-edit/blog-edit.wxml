@@ -10,7 +10,9 @@
     <block wx:for="{{imgList}}" wx:key="{{index}}">
       <view class="imgWrap">
         <image src="{{item}}" mode="aspectFill" bind:tap="preview" data-src="{{item}}"></image>
-        <view class="del" bind:tap="onDel"  data-index="{{index}}"><text>✖</text></view>
+        <view class="del" bind:tap="onDel" data-index="{{index}}">
+          <span class="iconfont icon-quxiao"></span>
+        </view>
       </view>
     </block>
     <view class="add" bind:tap="onChooseImg" hidden="{{!isAddable}}">

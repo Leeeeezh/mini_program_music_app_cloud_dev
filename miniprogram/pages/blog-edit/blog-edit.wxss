@@ -66,8 +66,9 @@ textarea {
   align-items: center;
 }
 
-.del text {
+.del span {
   font-size: 30rpx;
+  line-height: 30rpx;
   color: #ffc107;
 }
 
@@ -89,6 +90,7 @@ textarea {
 
 .add text {
   font-size: 100rpx;
+  line-height: 100rpx;
   color: #f0f0f0;
 }
 
@@ -102,4 +104,5 @@ textarea {
 
 .footer button {
   background-color: #ffc107;
+  border-radius: 40rpx;
 }

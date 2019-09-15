@@ -9,7 +9,7 @@ Page({
   },
   onGetUserInfo(event) {
     const userInfo = event.detail.userInfo
-    if(userInfo){
+    if (userInfo) {
       console.log('已授权')
       this.setData({
         isModelShow: false
@@ -17,7 +17,7 @@ Page({
       wx.navigateTo({
         url: '../blog-edit/blog-edit',
       })
-    }else {
+    } else {
       wx.showToast({
         title: '登录后才能发表内容哦😶',
         icon: 'none',
@@ -35,6 +35,9 @@ Page({
             success: res => {
               console.log(res)
             }
+          })
+          wx.showLoading({
+            title: '加载中🤣'
           })
           wx.navigateTo({
             url: '../blog-edit/blog-edit',
@@ -57,6 +60,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.hideLoading()
   },
 
 
@@ -71,7 +75,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    wx.hideLoading()
   },
 
   /**

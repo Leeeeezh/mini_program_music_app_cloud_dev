@@ -1,4 +1,10 @@
 <!--pages/blog/blog.wxml-->
 <view class="container">
-  <text>施工中</text>
+  <view class="mask" hidden="{{!isModelShow}}" bind:tap="onModelClose"></view>
+  <comp-blogsearch bind:publish="onPublish" />
+  <comp-bottommodel bind:close="onModelClose" isModelShow="{{isModelShow}}">
+    <view class="loginBtn" slot="content">
+      <button open-type="getUserInfo" bind:getuserinfo="onGetUserInfo">点击登录</button>
+    </view>
+  </comp-bottommodel>
 </view>

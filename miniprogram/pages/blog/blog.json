@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "van-btn": "vant-weapp/button",
-    "van-slider": "vant-weapp/slider"
+    "van-slider": "vant-weapp/slider",
+    "comp-blogsearch": "../../components/blogsearch/index",
+    "comp-bottommodel": "../../components/bottommodel/index"
   }
 }

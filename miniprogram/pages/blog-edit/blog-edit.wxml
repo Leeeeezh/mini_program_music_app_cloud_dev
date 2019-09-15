@@ -1,0 +1,24 @@
+<!--pages/blog-edit/blog-edit.wxml-->
+<view class="container">
+  <view class="editArea">
+    <textarea maxlength="-1" auto-focus="" bindinput="onInput" bindfocus="onFocus" bindblur="onBlur" placeholder="分享新鲜事儿......"></textarea>
+  </view>
+  <view class="num">
+    <text>{{wordsNum}}/140</text>
+  </view>
+  <view class="imgArea">
+    <block wx:for="{{imgList}}" wx:key="{{index}}">
+      <view class="imgWrap">
+        <image src="{{item}}" mode="aspectFill" bind:tap="preview" data-src="{{item}}"></image>
+        <view class="del" bind:tap="onDel"  data-index="{{index}}"><text>✖</text></view>
+      </view>
+    </block>
+    <view class="add" bind:tap="onChooseImg" hidden="{{!isAddable}}">
+      <text>+</text>
+    </view>
+  </view>
+  <view class="footer" style="bottom:{{footerBottom}}px">
+    <text class="wordNum">{{wordNum}}</text>
+    <button class="btn" bind:tap="onPublish">发布</button>
+  </view>
+</view>

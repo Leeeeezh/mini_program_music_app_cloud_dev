@@ -161,8 +161,10 @@ Page({
     if (forceplay === 'true' || id != wx.getStorageSync('playingId')) {
       // console.log('Start Download Resource')
       //  加载歌曲数据
-      if(forceplay==='true'){
+      this._bindPlayerEvent()
+      if (forceplay === 'true') {
         player.play()
+        console.log(player.src)
       }
       wx.cloud.callFunction({
         name: "music",
@@ -188,7 +190,8 @@ Page({
           }, 2000)
           return
         }
-        if (forceplay != "true") {
+
+        if (!player.src || player.src != musicUrl) {
           player.src = musicUrl
         }
         player.title = this.data.musicInfo.name

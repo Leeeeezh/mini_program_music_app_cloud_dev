@@ -34,6 +34,9 @@ Component({
         return
       }
       for (let i = 0; i < lrcList.length; i++) {
+        if (i === lrcList.length - 1) {
+          return
+        }
         if (lrcList[i].seconds < second && second < lrcList[i + 1].seconds) {
           if (this.data.activedIndex === i) {
             return
@@ -83,7 +86,7 @@ Component({
       this.setData({
         lrcList
       })
-      // console.log(this.data.lrcList)
+      console.log(this.data.lrcList)
     }
   }
 })

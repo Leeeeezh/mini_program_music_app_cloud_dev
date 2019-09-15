@@ -22,9 +22,10 @@ Component({
     navToPlayer() {
       const id = wx.getStorageSync('playingId')
       const index = wx.getStorageSync('playingIndex')
-      if (!index) {
+      console.log(index)
+      if (index === -1 || index === '') {
         wx.showToast({
-          title: '尚无最近播放记录,快去歌单看看吧',
+          title: '还没有最近播放记录,快去歌单看看吧😋',
           icon: 'none',
           duration: 2000,
         })

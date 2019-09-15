@@ -1,0 +1,105 @@
+/* pages/blog-edit/blog-edit.wxss */
+
+.container {
+  position: relative;
+  background-color: #1f2734;
+  min-height: 100vh;
+}
+
+.editArea {
+  padding: 20rpx;
+  color: #f0f0f0;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.num {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.num text {
+  color: #f0f0f0;
+}
+
+.imgArea {
+  padding: 10rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.imgWrap {
+  position: relative;
+  width: 220rpx;
+  height: 220rpx;
+  overflow: hidden;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.imgWrap .del {
+  margin: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f0f0f0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.del text {
+  font-size: 30rpx;
+  color: #ffc107;
+}
+
+.add {
+  box-sizing: border-box;
+  width: 220rpx;
+  height: 220rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10rpx;
+  border: 4rpx dashed #ccc;
+}
+
+.add:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.add text {
+  font-size: 100rpx;
+  color: #f0f0f0;
+}
+
+.footer {
+  width: 100%;
+  padding: 10rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.footer button {
+  background-color: #ffc107;
+}

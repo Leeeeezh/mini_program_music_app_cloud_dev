@@ -1,0 +1,5 @@
+<!--components/bottommodel/index.wxml-->
+<view class="container" hidden="{{!isModelShow}}">
+  <view class="close" bind:tap="onClose">✖</view>
+  <slot name="content"></slot>
+</view>

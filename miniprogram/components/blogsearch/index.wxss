@@ -52,7 +52,7 @@
   color: #121826;
   background-color: #ffc107;
   margin-left: 20rpx;
-  border-radius: 20rpx;
+  border-radius: 10rpx;
   padding: 10rpx;
   display: flex;
   flex-direction: row;

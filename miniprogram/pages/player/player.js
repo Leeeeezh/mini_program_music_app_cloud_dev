@@ -158,13 +158,12 @@ Page({
     wx.setNavigationBarTitle({
       title: `${this.data.musicInfo.name}`,
     })
-    if (forceplay === 'true' || id != wx.getStorageSync('playingId')) {
+    if (!player.src || id != wx.getStorageSync('playingId')) {
       // console.log('Start Download Resource')
       //  加载歌曲数据
       this._bindPlayerEvent()
       if (forceplay === 'true') {
         player.play()
-        console.log(player.src)
       }
       wx.cloud.callFunction({
         name: "music",
@@ -190,10 +189,7 @@ Page({
           }, 2000)
           return
         }
-
-        if (!player.src || player.src != musicUrl) {
-          player.src = musicUrl
-        }
+        player.src = musicUrl
         player.title = this.data.musicInfo.name
         player.coverImgUrl = this.data.musicInfo.al.picUrl
         player.singer = this.data.musicInfo.ar[0].name

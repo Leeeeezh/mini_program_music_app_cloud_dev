@@ -2,7 +2,7 @@
 <view class="container">
   <view class="search">
     <view class="icon" bind:tap="onPublish">
-      <span class="iconfont icon-fenxiang"></span>
+      <span class="iconfont icon-zhifeiji"></span>
     </view>
     <view class="wrap">
       <input placeholder="请输入关键字"></input>

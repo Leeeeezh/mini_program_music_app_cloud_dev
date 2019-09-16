@@ -78,7 +78,7 @@ Page({
   onShow() {
     //  页面显示时更新正在播放歌曲的高亮样式
     this.setData({
-      playingId: getApp().globalData.playingId
+      playingId: wx.getStorageSync('playingId')
     })
   },
   _setMusicList() {

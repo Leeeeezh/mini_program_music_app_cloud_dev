@@ -3,6 +3,10 @@
     "van-btn": "vant-weapp/button",
     "van-slider": "vant-weapp/slider",
     "comp-blogsearch": "../../components/blogsearch/index",
-    "comp-bottommodel": "../../components/bottommodel/index"
-  }
+    "comp-bottommodel": "../../components/bottommodel/index",
+    "comp-blogcard": "../../components/blogcard/index",
+    "comp-toplayer": "../../components/toplayer/index",
+    "comp-title": "../../components/title/index"
+  },
+  "enablePullDownRefresh": true
 }

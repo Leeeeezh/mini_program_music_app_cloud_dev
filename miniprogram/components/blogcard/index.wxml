@@ -1,0 +1,34 @@
+<!--components/blogcard/index.wxml-->
+<view class="container" bind:tap="onContentTap">
+  <!-- 标题 -->
+  <view class="title">
+    <view class="avatar" catch:tap="navToUserDetail">
+      <image src="{{content.avatarUrl}}"></image>
+    </view>
+    <view class="pubInfo">
+      <text class="userName">{{content.nickName}}</text>
+      <text class="pubTime">{{createdTime}}</text>
+    </view>
+  </view>
+  <!-- 内容 -->
+  <view class="content">
+    <view class="text">
+      <text>{{content.content}}</text>
+    </view>
+    <view class="img" wx:if="{{content.img.length!=0}}">
+      <block wx:for="{{content.img}}" wx:key="">
+        <image class="contentImg" src="{{item}}" mode="aspectFill" catch:tap="preview" data-index="{{index}}" data-src="{{item}}"></image>
+      </block>
+    </view>
+  </view>
+  <!-- 按钮 -->
+  <view class="comment">
+    <view catch:tap="onLike">
+      <span class="iconfont {{isLiked?'icon-xihuanlike':'icon-xihuan'}}"></span>
+    </view>
+    <view catch:tap="onContentTap">
+      <span class="iconfont icon-pinglun"></span>
+    </view>
+  </view>
+  <view class="bar"></view>
+</view>

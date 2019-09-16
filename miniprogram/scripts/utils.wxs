@@ -15,8 +15,8 @@ var tranNumber = function(num) {
   }
 }
 
-var timeFormater = function (num) {
-  if(num === '??:??') {
+var timeFormater = function(num) {
+  if (num === '??:??') {
     return '??:??'
   }
   var numFixed = Math.floor(num)

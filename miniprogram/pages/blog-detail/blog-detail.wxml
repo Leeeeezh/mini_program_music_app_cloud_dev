@@ -1,0 +1,4 @@
+<!--pages/blog-detail/blog-detail.wxml-->
+<view class="container">
+  <comp-blogcard content="{{content}}"/>
+</view>

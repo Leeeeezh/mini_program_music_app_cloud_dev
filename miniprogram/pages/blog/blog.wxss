@@ -1,11 +1,13 @@
 /* pages/blog/blog.wxss */
 
 .container {
+  padding-top: 100rpx;
   position: relative;
   z-index: 100;
   width: 100%;
   min-height: 100vh;
   background-color: #1f2734;
+  padding-bottom: 50rpx;
 }
 
 .mask {
@@ -17,6 +19,14 @@
   background-color: black;
   backdrop-filter: blur(2rpx);
   opacity: 0.6;
+}
+
+.search {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: all .3s ease-in-out;
 }
 
 .loginBtn {
@@ -36,4 +46,40 @@
 
 .loginBtn button:active {
   background-color: #b38706;
+}
+
+.blogCard {
+  margin-bottom: 20rpx;
+}
+
+.searchHide {
+  top: -100rpx;
+}
+
+.toTop {
+  background-color: #1f2734;
+  width: 160rpx;
+  height: 160rpx;
+  padding: 0;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 160rpx;
+  right: 60rpx;
+  z-index: 200;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow:  0 0 10rpx #1f2734;
+
+  transition: all .3s ease-in-out;
+}
+
+.icon-huidaodingbu {
+  font-size: 180rpx;
+  color: #ffc107;
+}
+
+.toTopHide {
+  transform: translateX(250rpx);
 }

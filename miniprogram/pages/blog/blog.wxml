@@ -1,10 +1,22 @@
 <!--pages/blog/blog.wxml-->
 <view class="container">
   <view class="mask" hidden="{{!isModelShow}}" bind:tap="onModelClose"></view>
-  <comp-blogsearch bind:publish="onPublish" />
+  <comp-blogsearch bind:publish="onPublish" class="search {{isSearchShow?'':'searchHide'}}"/>
+
+  <block wx:for="{{blogs}}" wx:key="">
+    <view class="blogCard">
+      <comp-blogcard content="{{item}}" bind:oncontenttap="navToBlogDetail"/>
+    </view>
+  </block>
+  <comp-title text="到底了🙄" wx:if="{{!hasMoreData}}"/>
+
   <comp-bottommodel bind:close="onModelClose" isModelShow="{{isModelShow}}">
     <view class="loginBtn" slot="content">
       <button open-type="getUserInfo" bind:getuserinfo="onGetUserInfo">点击登录</button>
     </view>
   </comp-bottommodel>
+
+  <view class="toTop {{isToTopBtnShow?'':'toTopHide'}}" bind:tap="scrollToTop">
+    <span class="iconfont icon-huidaodingbu"></span>
+  </view>
 </view>

@@ -6,26 +6,79 @@ Page({
    * 页面的初始数据
    */
   data: {
-    swiperImgUrls: [{
-        url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
-      },
-      {
-        url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
-      },
-      {
-        url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
-      }
-    ],
+    isAuth: true,
+    myPlayList: [],
     playlists: [],
     loadMoreLock: false,
     isToTopBtnShow: false,
-    musicTitle: ''
+    musicTitle: '',
+    myPlayListCover: '',
+    likedPlayList: []
+  },
+  onGetUserInfo(event) {
+    const userInfo = event.detail.userInfo
+    if (userInfo) {
+      console.log('已授权')
+      this.setData({
+        isAuth: true
+      })
+      wx.cloud.callFunction({
+        name: 'createUser',
+        data: {
+          userInfo
+        }
+      }).then(res => {
+        this._getPersonalData()
+      })
+    } else {
+      console.log('auth denied')
+    }
+  },
+  _getPersonalData() {
+    console.log('请求用户数据')
+    wx.cloud.callFunction({
+      name: 'getPersonalData'
+    }).then(res => {
+      console.log(res.result)
+      if (res.result.myPlayList.length != 0) {
+        this.setData({
+          myPlayList: res.result.myPlayList,
+          myPlayListCover: res.result.myPlayList[0].al.picUrl,
+          likedPlayList: res.result.likedPlayList
+        })
+      }
+
+      wx.setStorageSync('personalData', res.result)
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: res => {
+              wx.cloud.callFunction({
+                name: 'createUser',
+                data: {
+                  userInfo: res.userInfo
+                }
+              }).then(res => {
+                this._getPersonalData()
+              })
+            }
+          })
+        } else {
+          console.log('No Auth')
+          this.setData({
+            isAuth: false
+          })
+        }
+      }
+    })
     this._getPlayList()
   },
 
@@ -102,6 +155,7 @@ Page({
       playlists: []
     })
     this._getPlayList()
+    this._getPersonalData()
   },
 
   /**
@@ -154,6 +208,7 @@ Page({
         })
         return
       }
+      console.log(res.result.data)
       this.setData({
         playlists: this.data.playlists.concat(res.result.data)
       })

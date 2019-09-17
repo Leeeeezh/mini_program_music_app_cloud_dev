@@ -1,10 +1,10 @@
 <!--components/playlist/index.wxml-->
 <wxs src="../../scripts/utils.wxs" module="utils" />
 <view class="container" bind:tap="navToMusicList">
-  <image class="img" src="{{playlist.picUrl}}"></image>
-  <view class="playCount">
+  <image class="img" src="{{playlist.picUrl?playlist.picUrl:playlist.coverImgUrl}}"></image>
+  <!-- <view class="playCount">
     <image class="icon" src="../../icons/music-white.png"></image>
     <text>{{utils.tranNumber(playlist.playCount)}}次播放</text>
-  </view>
+  </view> -->
   <view class="name"><text>{{playlist.name}}</text></view>
 </view>

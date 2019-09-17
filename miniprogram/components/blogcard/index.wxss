@@ -33,10 +33,12 @@
   align-items: flex-start;
 }
 
-.pubInfo .user
+.pubInfo .userName {
+  font-size: 40rpx;
+}
 
 .pubInfo .pubTime {
-  color: #bbb;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .content {
@@ -97,7 +99,7 @@
 }
 
 .bar {
-  margin:20rpx 0;
+  margin: 20rpx 0;
   width: 300rpx;
   height: 10rpx;
   border-radius: 5rpx;

@@ -1,6 +1,6 @@
 <!--pages/playlist/playlist.wxml-->
 <view class="container">
-  <comp-toplayer class="toPlayer" musicTitle="{{musicTitle}}"/>
+  <comp-toplayer class="toPlayer" musicTitle="{{musicTitle}}" />
   <!-- 返回顶部按钮 -->
   <view class="toTop {{isToTopBtnShow?'':'toTopHide'}}" bind:tap="scrollToTop">
     <span class="iconfont icon-huidaodingbu"></span>
@@ -10,21 +10,23 @@
       <text>🔍搜索</text>
     </view>
   </view>
-  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="2000" circular="{{true}}" class="swiper" indicator-color="rgba(0, 0, 0 ,.2)" indicator-active-color="rgba(255, 193, 7, 1)" bind:tap="navToPlayer">
-    <block wx:for="{{swiperImgUrls}}" wx:key="">
-      <swiper-item>
-        <image src="{{item.url}}" mode="widthFix"></image>
-      </swiper-item>
-    </block>
-  </swiper>
 
-  <comp-title text="每日推荐" />
+  <comp-title text="我的" />
   <view class="playlists">
-    <block wx:for="{{playlists}}" wx:key="">
+    <button wx:if="{{!isAuth}}" class="login" open-type="getUserInfo" bind:getuserinfo="onGetUserInfo">登录</button>
+    <comp-myplaylist wx:if="{{isAuth}}" cover="{{myPlayListCover}}"/>
+    <block wx:if="{{isAuth}}" wx:for="{{likedPlayList}}" wx:key="item.id">
       <comp-playlist playlist="{{item}}" />
     </block>
   </view>
-  <comp-title text="做人要有底线" wx:if="{{loadMoreLock}}" />
+
+  <comp-title text="每日推荐" />
+  <view class="playlists">
+    <block wx:for="{{playlists}}" wx:key="item.id">
+      <comp-playlist playlist="{{item}}" />
+    </block>
+  </view>
+  <comp-title text="底线" wx:if="{{loadMoreLock}}" />
 
 
 </view>

@@ -8,7 +8,8 @@
     "pages/player/player",
     "pages/search/search",
     "pages/blog-edit/blog-edit",
-    "pages/blog-detail/blog-detail"
+    "pages/blog-detail/blog-detail",
+    "pages/mymusiclist/mymusiclist"
   ],
   "tabBar": {
     "color": "#95b7c9",
@@ -17,19 +18,19 @@
     "list": [
       {
         "pagePath": "pages/playlist/playlist",
-        "text": "首页",
+        "text": "歌单",
         "iconPath": "icons/home.png",
         "selectedIconPath": "icons/home-fill.png"
       },
       {
         "pagePath": "pages/blog/blog",
-        "text": "发现",
+        "text": "动态",
         "iconPath": "/icons/blog.png",
         "selectedIconPath": "icons/blog-fill.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的",
+        "text": "我",
         "iconPath": "icons/user.png",
         "selectedIconPath": "icons/user-fill.png"
       }

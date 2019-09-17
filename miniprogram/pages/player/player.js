@@ -61,11 +61,7 @@ Page({
     this._initAnimation('next')
 
     if (this.data.index === this.data.listLength - 1) {
-      wx.showToast({
-        title: '回到第一首啦',
-        icon: 'none',
-        duration: 1500
-      })
+      this._toast('跳到最后一首啦')
       this._init(0)
     } else {
       this._init(parseInt(this.data.index) + 1)
@@ -79,11 +75,7 @@ Page({
     })
     this._initAnimation('prev')
     if (parseInt(this.data.index) === 0) {
-      wx.showToast({
-        title: '跳到最后一首啦',
-        icon: 'none',
-        duration: 1500
-      })
+      this._toast('跳到最后一首啦')
       this._init(this.data.listLength - 1)
     } else {
       this._init(parseInt(this.data.index) - 1)
@@ -110,11 +102,8 @@ Page({
         playMode: 1
       })
     }
-    wx.showToast({
-      title: this.data.playModeToast[this.data.playMode],
-      icon: 'none',
-      duration: 2000
-    })
+    this._toast(this.data.playModeToast[this.data.playMode])
+    
   },
 
   onLike() {
@@ -122,10 +111,57 @@ Page({
       isLiked: !this.data.isLiked
     })
 
-    this.data.isLiked && wx.showToast({
-      title: '已收藏',
-      duration: 2000,
-      icon: 'none'
+    if (this.data.isLiked) {
+      wx.cloud.callFunction({
+        name: 'music',
+        data: {
+          musicInfo: this.data.musicInfo,
+          $url: 'like'
+        }
+      }).then(res => {
+        console.log(res)
+        if (res.result.msg == "success") {
+          this._toast('已喜欢💖')
+        } else {
+          this._toast('出错了💢')
+        }
+      })
+    } else {
+      wx.cloud.callFunction({
+        name: 'music',
+        data: {
+          musicId: this.data.musicInfo.id,
+          $url: 'dislike'
+        }
+      }).then(res => {
+        if (res.result.msg == 'success') {
+          this._toast('不喜欢了💔')
+        } else {
+          this._toast('出错了')
+        }
+      })
+    }
+  },
+  _checkLikeStatus() {
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId: this.data.musicInfo.id,
+        $url: 'checkLikeStatus'
+      }
+    }).then(res => {
+      console.log(res.result)
+      if (res.result.msg == "liked") {
+        this.setData({
+          isLiked: true
+        })
+        console.log('该歌曲已喜欢')
+      } else {
+        this.setData({
+          isLiked: false
+        })
+        console.log('该歌曲未喜欢')
+      }
     })
   },
   _initAnimation(direction) {
@@ -162,9 +198,6 @@ Page({
       // console.log('Start Download Resource')
       //  加载歌曲数据
       this._bindPlayerEvent()
-      if (forceplay === 'true') {
-        player.play()
-      }
       wx.cloud.callFunction({
         name: "music",
         data: {
@@ -197,6 +230,7 @@ Page({
         wx.setStorageSync('playingId', this.data.musicInfo.id)
         wx.setStorageSync('playingIndex', index)
         wx.setStorageSync('musicTitle', this.data.musicInfo.name)
+        this._checkLikeStatus()
       })
       // 加载歌词数据
       wx.cloud.callFunction({
@@ -221,9 +255,9 @@ Page({
         getApp().globalData.lyric = lyric
         wx.setStorageSync('lyric', lyric)
       })
-
     } else {
-      console.log('The music is being played')
+      player.play()
+      this._checkLikeStatus()
     }
     //  得到歌曲资源URL后请求数据
   },
@@ -307,5 +341,12 @@ Page({
     } else {
       player.pause()
     }
+  },
+  _toast(text) {
+    wx.showToast({
+      title: text,
+      icon: 'none',
+      duration: 2000
+    })
   }
 })

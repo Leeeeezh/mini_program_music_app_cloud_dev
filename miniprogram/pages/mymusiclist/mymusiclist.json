@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "comp-listitem": "../../components/listitem/index"
+  }
+  
+}

@@ -1,0 +1,5 @@
+<!--components/likedplaylist/index.wxml-->
+<view class="container" bind:tap="navToMusicList">
+  <image class="img" src="{{cover?cover:'../../images/like_default.png'}}"></image>
+  <view class="name"><text>我喜欢的歌曲</text></view>
+</view>

@@ -3,7 +3,9 @@
     "comp-playlist": "../../components/playlist/index",
     "comp-title": "../../components/title/index",
     "van-search": "vant-weapp/search",
-    "comp-toplayer": "../../components/toplayer/index"
+    "van-btn": "vant-weapp/button",
+    "comp-toplayer": "../../components/toplayer/index",
+    "comp-myplaylist": "../../components/myplaylist/index"
   },
   "enablePullDownRefresh": true
 }

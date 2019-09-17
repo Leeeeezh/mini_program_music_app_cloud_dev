@@ -1,0 +1,9 @@
+<!--pages/mymusiclist/mymusiclist.wxml-->
+<!--pages/musiclist/musiclist.wxml-->
+<view class="container">
+  <view class="body">
+    <block wx:for="{{musiclist}}" wx:key="index">
+      <comp-listitem name="{{item.name}}" author="{{item.ar}}" id="{{item.id}}" index="{{index+1}}" class="listitem" alia="{{item.alia}}" isPlaying="{{item.id===playingId}}" data-id="{{item.id}}" data-index="{{index}}" bind:tap="play"/>
+    </block>
+  </view>
+</view>

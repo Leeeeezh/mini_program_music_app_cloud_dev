@@ -1,4 +1,6 @@
 // pages/blog/blog.js
+const db = wx.cloud.database()
+
 Page({
 
   /**
@@ -24,6 +26,12 @@ Page({
       console.log('已授权')
       this.setData({
         isModelShow: false
+      })
+      wx.cloud.callFunction({
+        name: 'createUser',
+        data: {
+          userInfo
+        }
       })
       wx.navigateTo({
         url: '../blog-edit/blog-edit',
@@ -84,6 +92,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: res => {
+              console.log('user info===>', res)
+            }
+          })
+        } else {
+          console.log('No Auth')
+        }
+      }
+    })
     wx.hideLoading()
     this._getMoreBlog()
   },

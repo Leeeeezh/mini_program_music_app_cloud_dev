@@ -1,12 +1,10 @@
-// components/playlist/index.js
+// components/likedplaylist/index.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    playlist: {
-      type: Object
-    }
+    cover: String
   },
 
   /**
@@ -17,11 +15,12 @@ Component({
   },
 
   /**
-   * 组件的方法列表   */
+   * 组件的方法列表
+   */
   methods: {
     navToMusicList(){
       wx.navigateTo({
-        url: `../../pages/musiclist/musiclist?playlistId=${this.data.playlist.id}`,
+        url: '../../pages/mymusiclist/mymusiclist',
       })
     }
   }

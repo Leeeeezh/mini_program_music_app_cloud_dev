@@ -35,13 +35,13 @@
   box-sizing: border-box;
   flex: 1;
   height: 70rpx;
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 35rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: #555;
+  color: #f0f0f0;
 }
 
 .wrap input {

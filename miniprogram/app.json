@@ -27,12 +27,6 @@
         "text": "动态",
         "iconPath": "/icons/blog.png",
         "selectedIconPath": "icons/blog-fill.png"
-      },
-      {
-        "pagePath": "pages/profile/profile",
-        "text": "我",
-        "iconPath": "icons/user.png",
-        "selectedIconPath": "icons/user-fill.png"
       }
     ]
   },

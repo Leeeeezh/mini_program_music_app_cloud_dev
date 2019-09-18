@@ -1,12 +1,12 @@
 // pages/blog-edit/blog-edit.js
 const db = wx.cloud.database()
+let userInfo = {}
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
     content: '',
     wordsNum: 0,
     footerBottom: 0,
@@ -21,19 +21,11 @@ Page({
   },
   onPublish() {
     if (this.data.wordsNum > 140) {
-      wx.showToast({
-        title: '最多只能上传140字🤣',
-        icon: 'none',
-        duration: 2000
-      })
+      this._toast('最多只能上传140字🤣')
       return
     }
     if (this.data.wordsNum === 0 || this.data.content.trim().length === 0) {
-      wx.showToast({
-        title: '一个字也没有耶😛',
-        icon: 'none',
-        duration: 2000
-      })
+      this._toast('一个字也没有耶😛')
       return
     }
     wx.showLoading({
@@ -52,7 +44,6 @@ Page({
     }
 
     Promise.all(tasks).then(res => {
-      console.log(res)
       let fileIds = []
       for (let r of res) {
         fileIds.push(r.fileID)
@@ -60,32 +51,26 @@ Page({
       console.log(fileIds)
       db.collection('blog').add({
         data: {
-          ...this.data.userInfo,
+          ...userInfo,
           content: this.data.content,
           img: fileIds,
           createdTime: db.serverDate()
         }
       }).then(res => {
         wx.hideLoading()
-        wx.showToast({
-          title: '发布成功😍',
-          duration: 2000
-        })
+        this._toast('发布成功😍')
+        let pages = getCurrentPages()
+        pages[0].onPullDownRefresh()
         setTimeout(() => {
           wx.navigateBack()
         }, 2000)
       }).catch(err => {
         wx.hideLoading()
-        wx.showToast({
-          title: '发布失败😭',
-          icon: 'none',
-          duration: 2000
-        })
+        this._toast('发布失败😭')
       })
     })
   },
   onDel(event) {
-    console.log(event)
     this.data.imgList.splice(event.currentTarget.dataset.index, 1)
     this.setData({
       imgList: this.data.imgList
@@ -122,11 +107,7 @@ Page({
       wordsNum
     })
     if (wordsNum > 140) {
-      wx.showToast({
-        title: '字数太多啦😥',
-        icon: 'none',
-        duration: 2000
-      })
+      this._toast('字数太多啦😥')
     }
   },
   onFocus(event) {
@@ -145,59 +126,14 @@ Page({
   onLoad: function(options) {
     wx.getUserInfo({
       success: res => {
-        this.setData({
-          userInfo: res.userInfo
-        })
+        userInfo = res.userInfo
       }
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+  _toast(text){
+    wx.showToast({
+      title: text,
+    })
   }
 })

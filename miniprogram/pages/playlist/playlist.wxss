@@ -5,9 +5,11 @@
   min-height: 100vh;
   position: relative;
 }
+
 .text {
-color:rgb(99, 236, 172)
+  color: rgb(99, 236, 172);
 }
+
 .toTop {
   background-color: #1f2734;
   width: 160rpx;
@@ -22,9 +24,8 @@ color:rgb(99, 236, 172)
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-shadow:  0 0 10rpx #1f2734;
-
-  transition: all .3s ease-in-out;
+  box-shadow: 0 0 10rpx #1f2734;
+  transition: all 0.3s ease-in-out;
 }
 
 .icon-huidaodingbu {
@@ -56,13 +57,17 @@ color:rgb(99, 236, 172)
   box-sizing: border-box;
   flex: 1;
   height: 70rpx;
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 35rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   color: #555;
+}
+
+.wrap text {
+  color: #f0f0f0;
 }
 
 .swiper {
@@ -92,7 +97,7 @@ image {
 }
 
 .login {
-  width:90%;
+  width: 90%;
   height: 80rpx;
   border-radius: 40rpx;
   background-color: #ffc107;

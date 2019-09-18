@@ -1,7 +1,7 @@
 <!--pages/blog/blog.wxml-->
 <view class="container">
   <view class="mask" hidden="{{!isModelShow}}" bind:tap="onModelClose"></view>
-  <comp-blogsearch bind:publish="onPublish" class="search {{isSearchShow?'':'searchHide'}}"/>
+  <comp-blogsearch bind:publish="onPublish" bind:search="onSearch" class="search {{isSearchShow?'':'searchHide'}}"/>
 
   <block wx:for="{{blogs}}" wx:key="">
     <view class="blogCard">

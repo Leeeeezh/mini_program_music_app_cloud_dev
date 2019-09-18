@@ -5,11 +5,11 @@
   <view class="toTop {{isToTopBtnShow?'':'toTopHide'}}" bind:tap="scrollToTop">
     <span class="iconfont icon-huidaodingbu"></span>
   </view>
-  <view class="search" bind:tap="navToSearch">
+  <!-- <view class="search" bind:tap="navToSearch">
     <view class="wrap">
       <text>🔍搜索</text>
     </view>
-  </view>
+  </view> -->
 
   <comp-title text="我的" />
   <view class="playlists">

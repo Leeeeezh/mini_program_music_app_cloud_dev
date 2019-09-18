@@ -35,6 +35,17 @@ Page({
     }
   },
   _getPersonalData() {
+    console.log('getPersonalData')
+    let personalData = wx.getStorageSync('personalData')
+    if (personalData) {
+      console.log('从缓存中读取personalData')
+      this.setData({
+        myPlayList: personalData.myPlayList,
+        myPlayListCover: personalData.myPlayList[0].al.picUrl,
+        likedPlayList: personalData.likedPlayList
+      })
+    }
+    this._loading()
     console.log('请求用户数据')
     wx.cloud.callFunction({
       name: 'getPersonalData'
@@ -47,7 +58,7 @@ Page({
           likedPlayList: res.result.likedPlayList
         })
       }
-
+      wx.hideLoading()
       wx.setStorageSync('personalData', res.result)
     })
   },
@@ -99,10 +110,16 @@ Page({
     let scrollTop = event.scrollTop
     // console.log(scrollTop)
     if (scrollTop > 600) {
+      if (this.data.isToTopBtnShow) {
+        return
+      }
       this.setData({
         isToTopBtnShow: true
       })
     } else {
+      if (!this.data.isToTopBtnShow) {
+        return
+      }
       this.setData({
         isToTopBtnShow: false
       })
@@ -147,7 +164,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    console.log('loading')
     this.setData({
       loadMoreLock: false
     })
@@ -162,6 +178,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+    console.log('reach bottom')
     this._getPlayList()
   },
 
@@ -173,6 +190,11 @@ Page({
       title: '没有更多了哦(￣_￣|||)',
       icon: 'none',
       duration: 2000
+    })
+  },
+  _loading() {
+    wx.showLoading({
+      title: '加载中🤣',
     })
   },
   //获取更多歌单

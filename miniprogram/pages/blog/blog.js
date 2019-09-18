@@ -1,6 +1,6 @@
 // pages/blog/blog.js
 const db = wx.cloud.database()
-
+let loadMoreLock = false
 Page({
 
   /**
@@ -8,7 +8,6 @@ Page({
    */
   data: {
     isModelShow: false,
-    loadMoreLock: false,
     blogs: [],
     isSearchShow: true,
     isToTopButtonShow: false,
@@ -37,11 +36,7 @@ Page({
         url: '../blog-edit/blog-edit',
       })
     } else {
-      wx.showToast({
-        title: '登录后才能发表内容哦😶',
-        icon: 'none',
-        duration: 2000
-      })
+      this._toast('登录后才能发表内容哦😶')
       console.log('auth denied')
     }
   },
@@ -64,11 +59,7 @@ Page({
             url: '../blog-edit/blog-edit',
           })
         } else {
-          wx.showToast({
-            title: '登录后才能发表内容哦😶',
-            icon: 'none',
-            duration: 2000
-          })
+          this._toast('登录后才能发表内容哦😶')
           this.setData({
             isModelShow: true
           })
@@ -108,57 +99,53 @@ Page({
     wx.hideLoading()
     this._getMoreBlog()
   },
-  _getMoreBlog() {
+  _getMoreBlog(keyword='') {
     if (!this.data.hasMoreData) {
-      this.noMoreDataToast()
+      this._toast('没有更多了哦😩')
     }
-    if (this.data.loadMoreLock) {
+    if (loadMoreLock) {
       return
     }
-    this.setData({
-      loadMoreLock: true
-    })
+    loadMoreLock = true
     this.showLoading()
     wx.cloud.callFunction({
       name: 'blog',
       data: {
+        keyword,
         start: this.data.blogs.length,
         length: 5,
         $url: 'blog'
       }
     }).then(res => {
       if (res.result.data.length === 0) {
-        this.noMoreDataToast()
+        this._toast('没有更多了哦😩')
         this.setData({
           hasMoreData: false
         })
         return
       }
       wx.hideLoading()
+      loadMoreLock = false
       this.setData({
-        loadMoreLock: false,
         blogs: this.data.blogs.concat(res.result.data),
       })
+      console.log('blogs=====>',res)
       console.log(res)
       wx.hideLoading()
     }).catch(err => {
+      console.log('err=====>',err)
       wx.hideLoading()
-      this.errorToast()
+      this._toast('Sorry,出错了😭')
     })
   },
-  noMoreDataToast() {
-    wx.showToast({
-      title: '没有更多了哦😩',
-      icon: 'none',
-      duration: 2000
+  onSearch(event) {
+    console.log(event.detail.keyword)
+    this.setData({
+      blogs: [],
+      hasMoreData: true,
+      loadMoreLock: false
     })
-  },
-  errorToast() {
-    wx.showToast({
-      title: 'Sorry,出错了😭',
-      icon: 'none',
-      duration: 2000
-    })
+    this._getMoreBlog(event.detail.keyword)
   },
   showLoading() {
     wx.showLoading({
@@ -166,99 +153,62 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  // onShow: function() {
-  //   wx.showLoading({
-  //     title: '加载中😜',
-  //   })
-  //   this.setData({
-  //     blogs: []
-  //   })
-  //   this._getMoreBlog()
-  // },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
 
     this.showLoading()
+    loadMoreLock = false
     this.setData({
-      loadMoreLock: false,
       hasMoreData: true,
       blogs: []
     })
     this._getMoreBlog()
   },
+
   onReachBottom: function() {
     this._getMoreBlog()
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
   onPageScroll: function(event) {
-    if (event.scrollTop < 400) {
-      this.setData({
-        isToTopBtnShow: true
-      })
-      return
-    }
     let scrollTop = event.scrollTop
     // console.log(scrollTop)
     if (scrollTop > 600) {
-      this.setData({
-        isToTopBtnShow: true
-      })
+      if (!this.data.isToTopBtnShow) {
+        this.setData({
+          isToTopBtnShow: true
+        })
+      }
+
     } else {
-      this.setData({
-        isToTopBtnShow: false
-      })
+      if (this.data.isToTopBtnShow) {
+        this.setData({
+          isToTopBtnShow: false
+        })
+      }
     }
 
     if (event.scrollTop > this.data.scrollTop) {
       this.data.scrollTop = event.scrollTop
       // console.log("下")
-      this.setData({
-        isSearchShow: false
-      })
+      if (this.data.isSearchShow) {
+        this.setData({
+          isSearchShow: false
+        })
+      }
     }
     if (event.scrollTop < this.data.scrollTop) {
       this.data.scrollTop = event.scrollTop
       // console.log("上")
-      this.setData({
-        isSearchShow: true
-      })
+      if (!this.data.isSearchShow) {
+        this.setData({
+          isSearchShow: true
+        })
+      }
     }
   },
+  _toast(text) {
+    wx.showToast({
+      title: text,
+      duration: 2000,
+      icon: 'none'
+    })
+  }
 })

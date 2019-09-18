@@ -1,5 +1,6 @@
 // pages/player/player.js
 // const glbData = getApp().globalData
+let timer = null
 const player = wx.getBackgroundAudioManager()
 Page({
   data: {
@@ -103,7 +104,7 @@ Page({
       })
     }
     this._toast(this.data.playModeToast[this.data.playMode])
-    
+
   },
 
   onLike() {
@@ -122,6 +123,7 @@ Page({
         console.log(res)
         if (res.result.msg == "success") {
           this._toast('已喜欢💖')
+          this._refreshHome()
         } else {
           this._toast('出错了💢')
         }
@@ -134,12 +136,27 @@ Page({
           $url: 'dislike'
         }
       }).then(res => {
+        this._refreshHome()
         if (res.result.msg == 'success') {
           this._toast('不喜欢了💔')
         } else {
           this._toast('出错了')
         }
       })
+    }
+  },
+  _refreshHome() {
+    const pages = getCurrentPages()
+    const length = pages.length
+    if (length === 2) {
+      pages[pages.length - 2]._getPersonalData()
+    } else if (length === 3) {
+      pages[pages.length - 3]._getPersonalData()
+      let prevPage = pages[pages.length - 2]
+      if (prevPage.route == 'pages/mymusiclist/mymusiclist') {
+        console.log('222')
+        prevPage._getMusicList()
+      }
     }
   },
   _checkLikeStatus() {

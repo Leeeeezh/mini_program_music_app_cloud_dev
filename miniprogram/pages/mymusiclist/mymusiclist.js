@@ -14,6 +14,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this._getMusicList()
+  },
+  _getMusicList() {
     const myPlayList = wx.getStorageSync('personalData').myPlayList
     this.setData({
       musiclist: myPlayList

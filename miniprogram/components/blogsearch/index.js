@@ -11,7 +11,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    keyword: ''
   },
 
   /**
@@ -19,11 +19,15 @@ Component({
    */
   methods: {
     onSearch() {
-      this.triggerEvent('search')
+      this.triggerEvent('search',{keyword: this.data.keyword})
+    },
+    onInput(event) {
+      this.setData({
+        keyword: event.detail.value
+      })
     },
     onPublish() {
       this.triggerEvent('publish')
-      console.log('on publish')
     }
   }
 })

@@ -5,7 +5,7 @@
       <span class="iconfont icon-zhifeiji"></span>
     </view>
     <view class="wrap">
-      <input placeholder="请输入关键字"></input>
+      <input placeholder="请输入关键字" bindinput="onInput"></input>
     </view>
     <view class="btn" bind:tap="onSearch">
       <text>搜索</text>
